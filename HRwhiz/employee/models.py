@@ -4,18 +4,18 @@ from django.db import models
 class Employee(models.Model):
     id=models.IntegerField(primary_key=True)
     name=models.CharField(max_length=80)
-    email=models.CharField(max_length=50)
+    email=models.EmailField(max_length=50)
     password=models.CharField(max_length=30)
-    address=models.CharField(max_length=100)
-    sick_leave=models.IntegerField()
-    casual_leave=models.IntegerField()
-    annual_leave=models.IntegerField()
+    address=models.CharField(max_length=255)
+    sick_leave=models.IntegerField(default=12)
+    casual_leave=models.IntegerField(default=5)
+    annual_leave=models.IntegerField(default=5)
     phone_number=models.IntegerField()
     pid=models.ForeignKey('Project',on_delete=models.CASCADE)
     did=models.ForeignKey('Department',on_delete=models.CASCADE)
-    manager_id=models.ForeignKey('Employee',on_delete=models.CASCADE,null=True)
-    status=models.BooleanField()
-    profile_url=models.CharField(max_length=30)
+    manager_id=models.ForeignKey('Employee',on_delete=models.CASCADE,null=True,blank=True)
+    status=models.BooleanField(default=False)
+    profile_url=models.CharField(max_length=30, null=True, blank=True)
 
     class Meta:
         verbose_name_plural='Employee'
@@ -23,7 +23,7 @@ class Employee(models.Model):
 class Department(models.Model):
     id=models.IntegerField(primary_key=True)
     name = models.CharField(max_length=80)
-    # leader_id=models.IntegerField()
+    leader_id=models.ForeignKey('Employee',on_delete=models.CASCADE,null=True,blank=True)
 
     class Meta:
         verbose_name_plural='Department'
@@ -31,7 +31,7 @@ class Department(models.Model):
 class Project(models.Model):
     id=models.IntegerField(primary_key=True)
     name = models.CharField(max_length=80)
-    # leader_id=models.ForeignKey('Employee',on_delete=models.CASCADE)
+    leader_id=models.ForeignKey('Employee',on_delete=models.CASCADE,null=True,blank=True)
     did=models.ForeignKey('Department',on_delete=models.CASCADE)
 
     class Meta:
@@ -55,7 +55,7 @@ class Feedback(models.Model):
     fed_body=models.CharField(max_length=50)
     
     class Meta:
-        verbose_name_plural='Feedback'
+        verbose_name_plural='Feedbacks'
     
 
     
