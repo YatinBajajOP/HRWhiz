@@ -7,7 +7,7 @@ class Employee(models.Model):
     email=models.EmailField(max_length=50)
     password=models.CharField(max_length=30)
     address=models.CharField(max_length=255)
-    designation=models.CharField(max_length=80)
+    designation=models.CharField(max_length=80, default='Manager')
     sick_leave=models.IntegerField(default=12)
     casual_leave=models.IntegerField(default=5)
     annual_leave=models.IntegerField(default=5)
