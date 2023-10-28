@@ -208,7 +208,7 @@
   .employee .left-navigation {
     position: absolute;
     width: 100px;
-    height: 1024px;
+    height: 920px;
     top: 0;
     left: 0;
     background-color: #006193;
@@ -259,14 +259,6 @@
     left: 38px;
   }
   
-  .employee .icon-settings {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    top: 930px;
-    left: 38px;
-  }
-  
   .employee .icon-mail {
     position: absolute;
     width: 24px;
@@ -293,7 +285,7 @@
   
   .employee .topbar {
     position: absolute;
-    width: 1340px;
+    width: 1320px;
     height: 100px;
     top: 0;
     left: 0;
@@ -549,7 +541,7 @@
   
   .employee .covid-test-daily {
     position: absolute;
-    width: 387px;
+    width: 395px;
     height: 390px;
     top: 269px;
     left: 1016px;
@@ -557,7 +549,7 @@
   
   .employee .overlap-5 {
     position: absolute;
-    width: 371px;
+    width: 395px;
     height: 389px;
     top: 0;
     left: 0;
@@ -566,7 +558,7 @@
   
   .employee .shadow {
     position: absolute;
-    width: 371px;
+    width: 395px;
     height: 369px;
     top: 0;
     left: 0;
@@ -576,7 +568,7 @@
   
   .employee .base {
     position: absolute;
-    width: 371px;
+    width: 395px;
     height: 389px;
     top: 0;
     left: 0;
@@ -763,16 +755,6 @@
     top: 133px;
     left: 1153px;
   }
-  
-
-
-
-  
-
-
-
-
-
 
   .manager {
     background-color: #f8f8fb;

@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "employee",
     "manager"
+    # 'rest_framework',
+    # 'rest_framework.authtoken',
+    # 'rest_framework_jwt',
+    # 'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -49,7 +53,26 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # 'corsheaders.middleware.CorsMiddleware',
 ]
+
+# # Added
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+#     ),
+# }
+# CORS_ALLOW_ALL_ORIGINS = True
+
+# # JWT settings
+# from datetime import timedelta
+
+# JWT_AUTH = {
+#     'JWT_ALLOW_REFRESH': True,
+#     'JWT_EXPIRATION_DELTA': timedelta(days=1),
+#     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
+# }
+# # Till here
 
 ROOT_URLCONF = "HRwhiz.urls"
 

@@ -7,6 +7,7 @@ class Employee(models.Model):
     email=models.EmailField(max_length=50)
     password=models.CharField(max_length=30)
     address=models.CharField(max_length=255)
+    designation=models.CharField(max_length=80)
     sick_leave=models.IntegerField(default=12)
     casual_leave=models.IntegerField(default=5)
     annual_leave=models.IntegerField(default=5)
@@ -49,8 +50,8 @@ class Requests(models.Model):
 
 class Feedback(models.Model):
     id=models.IntegerField(primary_key=True)
-    fed_by=models.ForeignKey('Employee',on_delete=models.CASCADE,related_name='given_feedback')
-    fed_to=models.ForeignKey('Employee',on_delete=models.CASCADE,related_name='recieved_feedback')
+    fed_by=models.ForeignKey('Employee',on_delete=models.CASCADE,related_name='given_feedback', null=True, blank=True)
+    fed_to=models.ForeignKey('Employee',on_delete=models.CASCADE,related_name='recieved_feedback', null=True, blank=True)
     type=models.CharField(max_length=50)
     fed_body=models.CharField(max_length=50)
     
