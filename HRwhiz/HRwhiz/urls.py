@@ -21,9 +21,11 @@ from . import views
 
 urlpatterns = [
     path("", views.login),
+    path('logout/', views.logout),
     path("admin/", admin.site.urls),
     # path("linkedin_learning/", redirect('https://www.linkedin.com/learning/')),
     # path("etms/", redirect('https://fidelityinternational.com/')),
     path("employee/",include('employee.urls')),
-    path("manager/",include('manager.urls'))
+    path("manager/",include('manager.urls')),
+    path("HR/", include('HR.urls'))
 ]

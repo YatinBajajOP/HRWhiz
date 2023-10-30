@@ -2,143 +2,170 @@
 <html>
 {% load static %}
   <head>
-    <link rel="stylesheet" href="globals.css" />
-    <link rel="stylesheet" href="{% static 'css/styleguide.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" >
+    <link rel="stylesheet" href="/static/css/style.css" >
   </head>
-  </head>
+  <title>Employee</title>
   <body>
-    <div class="HR">
+    <div class="employee">
       <div class="div">
         <div class="left-navigation">
-          <div class="selected"><img class="icon-chart" src="img/chart.svg" /></div>
-          <div class="overlap-group"><img class="ellipse" src="img/ellipse-1.png" /></div>
-          <img class="icon-folders" src="img/folders.svg" />
-          <img class="icon-settings" src="img/settings.svg" />
-          <img class="icon-mail" src="img/mail.svg" />
-          <img class="icon-files" src="img/files.svg" />
+          <div class="selected"><img class="icon-chart" src="/static/img/home-2-svgrepo-com.svg" /></div>
+          <div class="overlap-group"><img class="ellipse" src="/static/img/circled-user-svgrepo-com.svg" /></div>
+          <img class="icon-folders" src="/static/img/folder-svgrepo-com.svg" />
+          <img class="icon-mail" src="/static/img/mail-open-svgrepo-com.svg" />
         </div>
         <div class="overlap">
           <div class="topbar">
-            <div class="icon-notifications">
-              <div class="ellipse-wrapper"><div class="ellipse-2"></div></div>
-              <img class="vector" src="img/vector-10.svg" />
-            </div>
-            <img class="icon-logout" src="img/logout-2.svg" />
-            <div class="search">
-              <input class="input" placeholder="Search..." type="text" />
-              <img class="icon-search" src="img/search.svg" />
-            </div>
+            <a href="/logout"><img class="icon-logout" src="/static/img/logout.png" /></a>
           </div>
           <div class="button-manage">
             <div class="overlap-2">
-              <img class="icon-edit" src="img/edit.svg" />
-              <div class="text-wrapper">Manage Employee</div>
+              <img class="icon-edit" src="/static/img/edit-svgrepo-com.svg" />
+              <div class="text-wrapper">Manage Employees</div>
             </div>
           </div>
-          <div class="topbar">
-            <div class="icon-notifications">
-              <div class="div-wrapper"><div class="ellipse-2"></div></div>
-              <img class="vector" src="img/vector.svg" />
-            </div>
-            <img class="icon-logout" src="img/logout.svg" />
-            <div class="search-2">
-              <input class="input" placeholder="Search..." type="text" />
-              <img class="icon-search" src="img/search-2.svg" />
-            </div>
-          </div>
-          <div class="button-manage">
-            <div class="overlap-2">
-              <img class="icon-edit" src="img/edit-2.svg" />
-              <div class="text-wrapper">Manage Employee</div>
-            </div>
+          <div class="topbar-2">
+          
           </div>
         </div>
         <div class="overlap-3">
-          <div class="text-wrapper-2">Welcome, Jose</div>
-          <div class="text-wrapper-2">Welcome, Jose</div>
+          <div class="text-wrapper-2">Welcome, {{name}}</div>
         </div>
         <div class="text-wrapper-3">How you doin?</div>
-        <img class="group" src="img/group-191.png" />
-        <div class="overlap-4">
-          <div class="base"></div>
-          <div class="base"></div>
-          <div class="text-wrapper-4">Add Employee</div>
-          <div class="text-wrapper-5">Send</div>
-          <img class="img" src="img/ellipse.png" />
-        </div>
-        <div class="overlap-5">
-          <div class="base"></div>
-          <div class="base"></div>
-          <div class="text-wrapper-4">Delete Employee</div>
-          <div class="text-wrapper-5">Send</div>
-          <img class="ellipse-3" src="img/image.png" />
-        </div>
-        <div class="overlap-6">
-          <div class="base"></div>
-          <div class="base"></div>
-          <div class="text-wrapper-6">Assign-Manager</div>
-          <div class="text-wrapper-5">Send</div>
-          <img class="img" src="img/ellipse-2.png" />
-        </div>
-        <div class="REVIEWS">
-          <div class="overlap-7">
-            <div class="card">
-              <div class="overlap-8">
-                <div class="bar-CTA">
-                  <div class="overlap-group-wrapper">
-                    <div class="overlap-group-2">
-                      <img class="BG" src="img/BG.svg" />
-                      <div class="group-2">
-                        <img class="icon-chevron-right" src="img/right.svg" />
-                        <div class="SEE-DETAILS">Reply</div>
-                      </div>
-                      <img class="vector-2" src="img/vector-1.svg" />
-                    </div>
-                  </div>
-                </div>
-                <img class="vector-3" src="img/vector-2-2.svg" />
-                <div class="lorem-ipsum-dolor">Employee Feedbacks</div>
-                <div class="data-center">Messages</div>
-                <img class="icon-menu" src="img/menu.svg" />
-                <img class="icon-drag" src="img/drag.svg" />
-              </div>
-            </div>
-            <div class="bar-scroll"></div>
-            <img class="vector-4" src="img/vector-7.svg" />
-            <img class="vector-5" src="img/vector-8.svg" />
-            <img class="vector-6" src="img/vector-9.svg" />
-            <p class="p">It is over qualified and easy to use, thank you.</p>
-            <p class="text-wrapper-7">An improvement is needed asap.</p>
-            <div class="text-wrapper-8">Works well!</div>
-            <p class="text-wrapper-9">Great service and useful interfaces.</p>
-            <div class="text-wrapper-10">20m ago</div>
-            <div class="text-wrapper-11">1 day ago</div>
-            <div class="text-wrapper-12">1 day ago</div>
-            <div class="text-wrapper-13">3 day ago</div>
-            <div class="text-wrapper-14">Sally D.</div>
-            <div class="text-wrapper-15">Michael K.</div>
-            <div class="text-wrapper-16">Deniz T.</div>
-            <div class="text-wrapper-17">Melissa</div>
-            <div class="group-3">
-              <div class="text-wrapper-18">5/5</div>
-              <img class="vector-7" src="img/image.svg" />
-            </div>
-            <div class="group-4">
-              <div class="text-wrapper-18">2/5</div>
-              <img class="vector-7" src="img/vector-5.svg" />
-            </div>
-            <div class="group-5">
-              <div class="text-wrapper-18">5/5</div>
-              <img class="vector-7" src="img/vector-6.svg" />
-            </div>
-            <div class="group-6">
-              <div class="text-wrapper-18">5/5</div>
-              <img class="vector-7" src="img/vector-3.svg" />
+        <a href='/employee/ask_hr'>
+          <div class="active-cases">
+            <div class="overlap-4">
+              <div class="text-wrapper-4">Ask HR</div>
+              <div class="text-wrapper-5">Send your queries</div>
+              <img class="img" src="/static/img/askhr.png" />
             </div>
           </div>
+        </a>
+        <a href='/employee/feedback'>
+          <div class="vaccine-administered">
+            <div class="overlap-4">
+              <div class="text-wrapper-4">Feedback</div>
+              <div class="text-wrapper-5">Write a feedback</div>
+              <img class="img" src="/static/img/feedback.svg" />
+            </div>
+          </div>
+        </a>
+        <a href='/employee/leaverequest'>
+          <div class="vaccination-per-day">
+            <div class="overlap-4">
+              <div class="text-wrapper-4">Apply Leave</div>
+              <div class="text-wrapper-5">Apply for a leave request to your Manager</div>
+              <img class="img" src="/static/img/leaves.svg" />
+            </div>
+          </div>
+        </a>
+        <div class="leaves-card">
+          <div class="overlap-5">
+            <div class="shadow"></div>
+            <div class="base"></div>
+            <div id="piechart"></div> 
+            <div class="text-wrapper-leaves"><table>
+              <tr>
+                <th>Leave   </th>
+                <th></th>
+                <th>Number of leaves</th>
+              </tr>
+              <tr>
+                <td>
+                  Sick
+                </td>
+                <td></td>
+                <td>
+                  12
+                </td>
+              </tr>  
+              <tr>
+                <td>
+                  Casual
+                </td>
+                <td></td>
+                <td>
+                  5
+                </td>
+              </tr> 
+              <tr>
+                <td>
+                  Annual  
+                </td>
+                <td></td>
+                <td>
+                  5
+                </td>
+              </tr>             
+            </table></div>
+              
+          </div>
+          <div class="section"></div>
         </div>
+        <a href='/HR/req'>
+          <div class="overlap-group-wrapper">
+            <div class="overlap-4">
+              <div class="text-wrapper-4">View requests</div>
+              <div class="text-wrapper-5">View requests to HR</div>
+              <img class="img" src="/static/img/etms.svg" />
+            </div>
+          </div>
+        </a>
+        <a href='/HR/add_employee'>
+          <div class="positivity-rate">
+            <div class="overlap-6">
+              <div class="text-wrapper-8">Add employee</div>
+              <div class="text-wrapper-9">Add new employees to database</div>
+              <img class="ellipse-4" src="/static/img/attendance.svg" />
+            </div>
+          </div>
+        </a>
+        <a href='/HR/delete_employee'>
+          <div class="positivity-rate-2">
+            <div class="overlap-6">
+              <div class="text-wrapper-8">Delete employee</div>
+              <div class="text-wrapper-9">Remove employee from database</div>
+              <img class="ellipse-4" src="/static/img/feedback.svg" />
+            </div>
+          </div>
+        </a>
+        <a href='/HR/addmanager'>
+          <div class="vaccine-administered-2">
+            <div class="overlap-4">
+              <div class="text-wrapper-4">Assign manager</div>
+              <div class="text-wrapper-5">Assign manager to employees</div>
+              <img class="img" src="/static/img/source.svg" />
+            </div>
+          </div>
+        </a>
       </div>
     </div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      // Load google charts
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      
+      // Draw the chart and set the chart values
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        ['Leave Type', 'Leaves'],
+        ['Casual', 5],
+        ['Annual', 5],
+        ['Sick', 12]  
+      ]);
+      
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'Leaves', 'width':380, 'height':300};
+      
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+      </script>
   </body>
 </html>
+
+
+
+

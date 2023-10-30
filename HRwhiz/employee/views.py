@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 # views.py
 # from rest_framework import viewsets, permissions
 # from rest_framework.response import Response
@@ -7,7 +8,7 @@ from django.shortcuts import render
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from .models import Employee
+from .models import Employee, Feedback
 from .serializers import EmployeeSerializer
 
 # class EmployeeViewSet(viewsets.ModelViewSet):
@@ -53,8 +54,39 @@ from .serializers import EmployeeSerializer
 
 # Create your views here.
 def dashboard(request):
-    return render(request, 'emp.html')
+    return render(request, 'emp.html', {'name': request.session['name'], 'id': request.session['id']})
+
+from django.shortcuts import render, redirect
+from .models import Feedback, askHR, leaverequest
 
 def feedback(request):
+    if request.method == 'POST':       
+        id=request.POST.get('id')
+        name=request.POST.get('name')
+        fed_to=request.POST.get('feedback_to')
+        des=request.POST.get('description')
+        res=Feedback(id=id,name=name,fed_to=fed_to,message=des)
+        res.save()
+    
     return render(request, 'feedback.html')
+def ask_hr(request):
+    if request.method == 'POST':
+        id=request.POST.get('employee_id')
+        text=request.POST.get('query')
+        res=askHR(id=id,text=text)
+        res.save()
+    return render(request,'askHR.html')
+
+def leaverequest(request):
+    if request.method == 'POST':
+        date_from = request.POST.get('date_from')
+        date_to = request.POST.get('date_to')
+        reason = request.POST.get('reason')
+
+        # Create and save a new LeaveRequest object
+        new_leave_request = leaverequest(date_from=date_from, date_to=date_to, reason=reason)
+        new_leave_request.save()
+
+        return redirect('success')  # Redirect to a success page after saving
+    return render(request, 'leaverequest.html')
 
