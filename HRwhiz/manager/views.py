@@ -8,7 +8,7 @@ def view_employees(request):
     return render(request, 'emp.html')
 
 def dashboard(request):
-    return render(request, 'mgr.html')
+    return render(request, 'mgr.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation']})
 
 def dep_project(request):
     if request.method == 'POST':

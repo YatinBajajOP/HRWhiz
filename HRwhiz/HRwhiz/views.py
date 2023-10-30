@@ -11,7 +11,8 @@ def login(request):
             if user is not None:
                 request.session['name'] = user.name
                 request.session['id'] = user.id
-                request.session['url'] = user.id
+                request.session['url'] = user.profile_url
+                request.session['designation'] = user.designation
 
                 if user.designation == "Employee":
                     return redirect('/employee')

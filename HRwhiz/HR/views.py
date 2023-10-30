@@ -3,7 +3,7 @@ from employee.models import Employee,Requests
 from django.shortcuts import redirect, render
 
 def dashboard(request):
-    return render(request, 'hr.html')
+    return render(request, 'hr.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation']})
 
 def add_employee(request):
     if request.method == 'POST':

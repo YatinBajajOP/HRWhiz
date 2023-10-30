@@ -54,7 +54,7 @@ from .serializers import EmployeeSerializer
 
 # Create your views here.
 def dashboard(request):
-    return render(request, 'emp.html', {'name': request.session['name'], 'id': request.session['id']})
+    return render(request, 'emp.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation']})
 
 from django.shortcuts import render, redirect
 from .models import Feedback, askHR, leaverequest
