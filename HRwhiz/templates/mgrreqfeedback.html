@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>HR Requests</title>
+    <title>Manager Requests</title>
     <style>
         /* Add your CSS styles here */
         body {
@@ -39,14 +39,14 @@
     </style>
 </head>
 <body>
-    <h1>HR Requests</h1>
+    <h1>Feedbacks To Manager</h1>
     <ul>
-        {% for request in hr_requests %}
+        {% for request in mgr_requests %}
     <div>
         Request ID: {{ request.id }}<br>
-        Requested by: {{ request.req_by.name }}<br>
+        Requested by: {{ request.fed_by_by.name }}<br>
         Type: {{ request.type }}<br>
-        Request Body: {{ request.req_body }}<br>
+        Request Body: {{ request.fed_body }}<br>
         <!-- Add more fields as needed -->
     </div>
     <hr>

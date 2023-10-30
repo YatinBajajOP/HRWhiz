@@ -22,7 +22,8 @@ class Employee(models.Model):
     phone_number=models.IntegerField()
     pid=models.ForeignKey('Project',on_delete=models.CASCADE, null=True, blank=True)
     did=models.ForeignKey('Department',on_delete=models.CASCADE, null=True, blank=True)
-    manager_id=models.ForeignKey('Employee',on_delete=models.CASCADE,null=True,blank=True)
+    manager_id=models.ForeignKey('Employee',on_delete=models.CASCADE,null=True,blank=True,related_name="manager")
+    hr_id=models.ForeignKey('Employee',on_delete=models.CASCADE,null=True,blank=True,related_name="hr")
     status=models.BooleanField(default=False)
     profile_url=models.CharField(max_length=30, null=True, blank=True)
 

@@ -18,7 +18,7 @@ from . import views
 urlpatterns = [
     path("", views.dashboard),
     path("feedback/", views.feedback, name='submit_feedback'),
-    path("ask_hr/", views.ask_hr, name='submit_hr_query'),
-    path('leaverequest/', views.leaverequest, name='submit_leave'),
+    path("askhr/", views.ask_hr, name='submit_hr_query'),
+    path('leaverequest/', views.leave_request, name='submit_leave'),
 
 ]

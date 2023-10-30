@@ -39,9 +39,9 @@
     </style>
 </head>
 <body>
-    <h1>HR Requests</h1>
+    <h1>Requests to Manager</h1>
     <ul>
-        {% for request in hr_requests %}
+        {% for request in manager_requests %}
     <div>
         Request ID: {{ request.id }}<br>
         Requested by: {{ request.req_by.name }}<br>
@@ -51,7 +51,6 @@
     </div>
     <hr>
 {% endfor %}
-
 
     </ul>
 </body>

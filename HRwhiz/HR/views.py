@@ -1,10 +1,13 @@
 from django.http import HttpResponse,request
-from employee.models import Employee,Requests
+from employee.models import Employee,Requests,Feedback
 from django.shortcuts import redirect, render
+from HRwhiz.views import session_login_required
 
+@session_login_required
 def dashboard(request):
     return render(request, 'hr.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation']})
 
+@session_login_required
 def add_employee(request):
     if request.method == 'POST':
         # Retrieve data from the form
@@ -41,9 +44,11 @@ def add_employee(request):
 
     return render(request, 'addemp.html')  # Show the form
 
+@session_login_required
 def success_page(request):
     return HttpResponse("Employee added successfully!")  # You can create a success page here
 
+@session_login_required
 def delete_employee(request):
     if request.method == 'POST':
         employee_id = request.POST.get('id')
@@ -58,10 +63,38 @@ def delete_employee(request):
         error_message = None
 
     return render(request, 'deleteemp.html', {'error_message': error_message})
+
+@session_login_required
 def hr_requests_view(request):
-    hr_requests = Requests.objects.filter(req_body='HR')
-    return render(request, 'req.html',{'hr_requests':hr_requests})
-def addmanager(request):
+    # Assuming you have stored the HR's ID in the session as 'hr_id'
+    hr_id = request.session.get('id', None)
+    
+    if hr_id is not None:
+        # Filter requests where req_to matches the logged-in HR's ID
+        hr_requests = Requests.objects.filter(req_to=hr_id)
+        
+        return render(request, 'req.html', {'hr_requests': hr_requests})
+    else:
+        # Handle the case where the HR is not logged in or the session is not set
+        # You can redirect to a login page or handle it as per your application's logic.
+        return render(request, 'hr.html')
+@session_login_required  
+def hr_Feedback_view(request):
+    # Assuming you have stored the HR's ID in the session as 'hr_id'
+    hr_id = request.session.get('id', None)
+    
+    if hr_id is not None:
+        # Filter requests where req_to matches the logged-in HR's ID
+        hr_requests = Requests.objects.filter(fed_to=hr_id)
+        
+        return render(request, 'reqfeedback.html', {'hr_requests': hr_requests})
+    else:
+        # Handle the case where the HR is not logged in or the session is not set
+        # You can redirect to a login page or handle it as per your application's logic.
+        return render(request, 'hr.html')
+
+@session_login_required
+def assign_manager(request):
     if request.method == 'POST':
         employee_id = request.POST['employee_id']
         manager_id = request.POST['manager_id']

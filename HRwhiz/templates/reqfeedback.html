@@ -39,20 +39,18 @@
     </style>
 </head>
 <body>
-    <h1>HR Requests</h1>
+    <h1>Feedbacks To Hr</h1>
     <ul>
         {% for request in hr_requests %}
     <div>
         Request ID: {{ request.id }}<br>
-        Requested by: {{ request.req_by.name }}<br>
+        Requested by: {{ request.fed_by_by.name }}<br>
         Type: {{ request.type }}<br>
-        Request Body: {{ request.req_body }}<br>
+        Request Body: {{ request.fed_body }}<br>
         <!-- Add more fields as needed -->
     </div>
     <hr>
 {% endfor %}
-
-
     </ul>
 </body>
 </html>

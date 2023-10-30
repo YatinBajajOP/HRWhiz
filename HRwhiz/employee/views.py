@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from .models import Feedback, askHR, leaverequest
 # views.py
 # from rest_framework import viewsets, permissions
 # from rest_framework.response import Response
@@ -10,6 +10,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from .models import Employee, Feedback
 from .serializers import EmployeeSerializer
+import uuid
+from HRwhiz.views import session_login_required
 
 # class EmployeeViewSet(viewsets.ModelViewSet):
 #     queryset = Employee.objects.all()
@@ -52,32 +54,34 @@ from .serializers import EmployeeSerializer
 #         else:
 #             return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
-# Create your views here.
+# Create your views here.\
+@session_login_required
 def dashboard(request):
     return render(request, 'emp.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation']})
 
-from django.shortcuts import render, redirect
-from .models import Feedback, askHR, leaverequest
-
+@session_login_required
 def feedback(request):
     if request.method == 'POST':       
-        id=request.POST.get('id')
-        name=request.POST.get('name')
+        # id=request.POST.get('id')
+        # name=request.POST.get('name')
         fed_to=request.POST.get('feedback_to')
         des=request.POST.get('description')
-        res=Feedback(id=id,name=name,fed_to=fed_to,message=des)
+        res=Feedback(id=str(uuid.uuid4()),fed_to=fed_to, fed_by = request.session['id'], message=des)
         res.save()
     
     return render(request, 'feedback.html')
+
+@session_login_required
 def ask_hr(request):
     if request.method == 'POST':
         id=request.POST.get('employee_id')
         text=request.POST.get('query')
-        res=askHR(id=id,text=text)
+        res=askHR(id=str(uuid.uuid4()),text=text)
         res.save()
     return render(request,'askHR.html')
 
-def leaverequest(request):
+@session_login_required
+def leave_request(request):
     if request.method == 'POST':
         date_from = request.POST.get('date_from')
         date_to = request.POST.get('date_to')

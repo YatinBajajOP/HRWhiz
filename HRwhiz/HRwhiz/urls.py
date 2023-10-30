@@ -20,8 +20,8 @@ from django.shortcuts import redirect
 from . import views
 
 urlpatterns = [
-    path("", views.login),
-    path('logout/', views.logout),
+    path("", views.log_in),
+    path('logout/', views.log_out),
     path("admin/", admin.site.urls),
     # path("linkedin_learning/", redirect('https://www.linkedin.com/learning/')),
     # path("etms/", redirect('https://fidelityinternational.com/')),
