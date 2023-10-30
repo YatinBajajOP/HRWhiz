@@ -99,9 +99,10 @@ class LeaveRequest(models.Model):
          primary_key = True, 
         #  default = create_uid(), 
          editable = False)
-    date_from=models.DateField(auto_now=False, auto_now_add=False)
-    date_to=models.DateField(auto_now=False, auto_now_add=False)
-    reason=models.CharField(max_length=100)
+    date_from = models.DateField(auto_now=False, auto_now_add=False)
+    date_to = models.DateField(auto_now=False, auto_now_add=False)
+    reason = models.CharField(max_length=100)
+    req_to = models.ForeignKey('Employee', on_delete=models.CASCADE, default=None)
     class Meta:
         verbose_name_plural='leaverequest'
 

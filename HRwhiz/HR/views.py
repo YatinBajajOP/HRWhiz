@@ -80,7 +80,7 @@ def hr_requests_view(request):
         return render(request, 'hr.html')
 
 @session_login_required  
-def hr_Feedback_view(request):
+def hr_feedback_view(request):
     # Assuming you have stored the HR's ID in the session as 'hr_id'
     hr_id = request.session.get('id', None)
     

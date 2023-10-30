@@ -106,8 +106,11 @@ def leave_request(request):
         date_to = request.POST.get('date_to')
         reason = request.POST.get('reason')
 
+        employee = Employee.objects.filter(request.session.get('id', None)).first()
+        mgr_id = employee.manager_id
+
         # Create and save a new LeaveRequest object
-        new_leave_request = LeaveRequest(id=str(uuid.uuid4()),date_from=date_from, date_to=date_to, reason=reason)
+        new_leave_request = LeaveRequest(id=str(uuid.uuid4()),date_from=date_from, date_to=date_to, reason=reason, req_to = mgr_id)
         new_leave_request.save()
 
     

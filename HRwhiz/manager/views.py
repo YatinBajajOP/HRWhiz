@@ -14,7 +14,7 @@ def dashboard(request):
     return render(request, 'mgr.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation']})
 
 @session_login_required
-def dep_project(request):
+def assign_dep_project(request):
     if request.method == 'POST':
         employee_id = request.POST['employee_id']
         department_id = request.POST['department_id']
@@ -52,7 +52,7 @@ def mgr_requests_view(request):
         # You can redirect to a login page or handle it as per your application's logic.
         return render(request, 'mgr.html')
 @session_login_required  
-def mgr_Feedback_view(request):
+def mgr_feedback_view(request):
     # Assuming you have stored the HR's ID in the session as 'hr_id'
     manager_id = request.session.get('id', None)
     
@@ -67,7 +67,7 @@ def mgr_Feedback_view(request):
         return render(request, 'mgr.html')
     
 @session_login_required
-def Employee_view_Status(request):
+def employee_view_status(request):
     # Get the manager_id from the session, assuming you've set it in a previous view.
     id = request.session.get('id')
     
