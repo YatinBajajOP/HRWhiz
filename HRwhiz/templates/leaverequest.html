@@ -70,17 +70,17 @@
     </div>
     <div class="container">
         <h1>Leave Request Form</h1>
-        <form method="post" action="{% url 'submit_leave' %}">
+        <form action="{% url 'submit_leave' %}" method="post">
             {% csrf_token %}
 
             <label for="date_from">Date From:</label><br />
-            <input type="date" id="date_from" name="date_from" /><br /><br /> <!-- Date input type -->
+            <input type="date" id="date_from" name="date_from" min={{today}}/><br /><br /> <!-- Date input type -->
 
             <label for="date_to">Date To:</label><br />
-            <input type="date" id="date_to" name="date_to" /><br /><br /> <!-- Date input type -->
+            <input type="date" id="date_to" name="date_to" min={{today}}/><br /><br /> <!-- Date input type -->
 
             <label for="reason">Reason:</label><br />
-            <textarea id="reason" name="reason" rows="4"></textarea><br /><br />
+            <textarea  type="text" id="reason" name="reason" style="resize:none; height:80px;"></textarea><br /><br />
 
             <input type="submit" value="Submit" />
         </form>

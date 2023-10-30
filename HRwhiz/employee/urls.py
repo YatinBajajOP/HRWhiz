@@ -20,5 +20,4 @@ urlpatterns = [
     path("feedback/", views.feedback, name='submit_feedback'),
     path("askhr/", views.ask_hr, name='submit_hr_query'),
     path('leaverequest/', views.leave_request, name='submit_leave'),
-
 ]

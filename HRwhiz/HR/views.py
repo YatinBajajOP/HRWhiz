@@ -1,5 +1,5 @@
 from django.http import HttpResponse,request
-from employee.models import Employee,Requests,Feedback
+from employee.models import Employee,Feedback, askHR, LeaveRequest
 from django.shortcuts import redirect, render
 from HRwhiz.views import session_login_required
 
@@ -71,13 +71,14 @@ def hr_requests_view(request):
     
     if hr_id is not None:
         # Filter requests where req_to matches the logged-in HR's ID
-        hr_requests = Requests.objects.filter(req_to=hr_id)
+        hr_requests = askHR.objects.filter(req_to=hr_id)
         
         return render(request, 'req.html', {'hr_requests': hr_requests})
     else:
         # Handle the case where the HR is not logged in or the session is not set
         # You can redirect to a login page or handle it as per your application's logic.
         return render(request, 'hr.html')
+
 @session_login_required  
 def hr_Feedback_view(request):
     # Assuming you have stored the HR's ID in the session as 'hr_id'
@@ -85,7 +86,7 @@ def hr_Feedback_view(request):
     
     if hr_id is not None:
         # Filter requests where req_to matches the logged-in HR's ID
-        hr_requests = Requests.objects.filter(fed_to=hr_id)
+        hr_requests = Feedback.objects.filter(fed_to=hr_id)
         
         return render(request, 'reqfeedback.html', {'hr_requests': hr_requests})
     else:

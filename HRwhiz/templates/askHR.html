@@ -72,11 +72,11 @@
         <h1>Ask HR</h1>
         <form action="{% url 'submit_hr_query' %}" method="post">
             {% csrf_token %}
-            <label for="employee_id">Employee ID:</label>
-            <input type="text" id="employee_id" name="employee_id" required>
+            {% comment %} <label for="employee_id">Employee ID:</label>
+            <input type="text" id="employee_id" name="employee_id" required> {% endcomment %}
 
             <label for="query">Your Query:</label>
-            <textarea id="query" name="query" rows="4" required></textarea>
+            <textarea  type="text" id="reason" name="reason" style="resize:none; height:80px;"></textarea><br /><br />
 
             <input type="submit" value="Submit" />
         </form>

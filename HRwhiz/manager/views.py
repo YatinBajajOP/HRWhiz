@@ -31,7 +31,7 @@ def dep_project(request):
             employee.did= department
             employee.save()
 
-            return HttpResponse('Finally DEpartment and Project Assigned to Employee')  
+            return HttpResponse('Finally Department and Project Assigned to Employee')  
         except Employee.DoesNotExist or Department.DoesNotExist or Project.DoesNotExist:
             # Handle the case where employee or manager is not found
             return HttpResponse('Either Emloyee or Department or Project not existing in Company ')
@@ -44,8 +44,7 @@ def mgr_requests_view(request):
     manager_id = request.session.get('id', None)
     
     if manager_id is not None:
-        # Filter requests where req_to matches the logged-in HR's ID
-        manager_requests = Requests.objects.filter(req_to=manager_id)
+        manager_requests = askHR.objects.filter(req_to=manager_id)
         
         return render(request, 'mgrreq.html', {'manager_requests': manager_requests})
     else:
@@ -59,7 +58,7 @@ def mgr_Feedback_view(request):
     
     if manager_id is not None:
         # Filter requests where req_to matches the logged-in HR's ID
-        mgr_requests = Requests.objects.filter(fed_to=manager_id)
+        mgr_requests = Feedback.objects.filter(fed_to=manager_id)
         
         return render(request, 'mgrreqfeedback.html', {'mgr_requests': mgr_requests})
     else:

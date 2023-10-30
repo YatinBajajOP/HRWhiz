@@ -55,19 +55,19 @@ class Project(models.Model):
     class Meta:
         verbose_name_plural='Project'
 
-class Requests(models.Model):
-    id=models.CharField( 
-         max_length=100,
-         primary_key = True, 
-         default = str(uuid.uuid4()), 
-         editable = False) 
-    req_by=models.ForeignKey('Employee',on_delete=models.CASCADE,related_name='request_made')
-    req_to=models.ForeignKey('Employee',on_delete=models.CASCADE,related_name='request_recieved')
-    type=models.CharField(max_length=50)
-    req_body=models.CharField(max_length=50)
+# class Requests(models.Model):
+#     id=models.CharField( 
+#          max_length=100,
+#          primary_key = True, 
+#          default = str(uuid.uuid4()), 
+#          editable = False) 
+#     req_by=models.ForeignKey('Employee',on_delete=models.CASCADE,related_name='request_made')
+#     req_to=models.ForeignKey('Employee',on_delete=models.CASCADE,related_name='request_recieved')
+#     type=models.CharField(max_length=50)
+#     req_body=models.CharField(max_length=50)
 
-    class Meta:
-        verbose_name_plural='Requests'
+#     class Meta:
+#         verbose_name_plural='Requests'
 
 class Feedback(models.Model):
     id=models.CharField( 
@@ -84,19 +84,26 @@ class Feedback(models.Model):
         verbose_name_plural='Feedbacks'
 
 class askHR(models.Model):
-    id=models.IntegerField(primary_key=True)
+    id=models.CharField(max_length=100,
+        primary_key=True,
+        default = str(uuid.uuid4()), 
+        editable = False) 
     text=models.TextField()
-
+    hr_id = models.ForeignKey('Employee', on_delete=models.CASCADE, default=None)
     class Meta:
         verbose_name_plural='askHR'
         
-class leaverequest(models.Model):
+class LeaveRequest(models.Model):
+    id = models.CharField( 
+         max_length=100,
+         primary_key = True, 
+        #  default = create_uid(), 
+         editable = False)
     date_from=models.DateField(auto_now=False, auto_now_add=False)
     date_to=models.DateField(auto_now=False, auto_now_add=False)
-    reason=models.TextField()
+    reason=models.CharField(max_length=100)
     class Meta:
         verbose_name_plural='leaverequest'
-    
 
     
 

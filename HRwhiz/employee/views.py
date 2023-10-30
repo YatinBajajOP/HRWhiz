@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect
-from .models import Feedback, askHR, leaverequest
+from .models import Feedback, askHR, LeaveRequest, Employee
 # views.py
 # from rest_framework import viewsets, permissions
 # from rest_framework.response import Response
 # from rest_framework.views import APIView
 # from rest_framework import status
-from rest_framework_jwt.settings import api_settings
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
-from .models import Employee, Feedback
-from .serializers import EmployeeSerializer
+# from rest_framework_jwt.settings import api_settings
+# from django.contrib.auth.models import User
+# from django.contrib.auth import authenticate
+# from .serializers import EmployeeSerializer
 import uuid
 from HRwhiz.views import session_login_required
 
@@ -64,23 +63,43 @@ def feedback(request):
     if request.method == 'POST':       
         # id=request.POST.get('id')
         # name=request.POST.get('name')
-        fed_to=request.POST.get('feedback_to')
+        # fed_to=request.POST.get('feedback_to')
         des=request.POST.get('description')
-        res=Feedback(id=str(uuid.uuid4()),fed_to=fed_to, fed_by = request.session['id'], message=des)
+        employee = Employee.objects.filter(id=request.session.get('id', None)).first()
+        
+        if request.POST.get('selection-value') == 'HR':
+            if employee:
+                fed_to = employee.hr_id
+            else:
+                fed_to = None
+        else:
+           if employee:
+                fed_to = employee.manager_id
+           else:
+                fed_to = None
+
+        # print(fed_to)                                                                                                                                                                                                                                                                                                                                                                 
+        # print(request.session.get('id', None))
+
+        # logged_user = Employee.objects.filter(id=request.session.get('id', None)).first()
+
+        res=Feedback(id=str(uuid.uuid4()),fed_to=fed_to,fed_by=employee,fed_body=des, type='Feedback')
         res.save()
     
     return render(request, 'feedback.html')
 
-@session_login_required
+session_login_required
 def ask_hr(request):
-    if request.method == 'POST':
-        id=request.POST.get('employee_id')
+    if request.method == 'POST':   
+       # id=request.POST.get('employee_id')
         text=request.POST.get('query')
-        res=askHR(id=str(uuid.uuid4()),text=text)
+        employee = Employee.objects.filter(id=request.session.get('id', None)).first()
+        hr=employee.hr_id
+        res=askHR(id=str(uuid.uuid4()),text=text, hr_id = hr)
         res.save()
     return render(request,'askHR.html')
 
-@session_login_required
+session_login_required
 def leave_request(request):
     if request.method == 'POST':
         date_from = request.POST.get('date_from')
@@ -88,9 +107,8 @@ def leave_request(request):
         reason = request.POST.get('reason')
 
         # Create and save a new LeaveRequest object
-        new_leave_request = leaverequest(date_from=date_from, date_to=date_to, reason=reason)
+        new_leave_request = LeaveRequest(id=str(uuid.uuid4()),date_from=date_from, date_to=date_to, reason=reason)
         new_leave_request.save()
 
-        return redirect('success')  # Redirect to a success page after saving
+    
     return render(request, 'leaverequest.html')
-
