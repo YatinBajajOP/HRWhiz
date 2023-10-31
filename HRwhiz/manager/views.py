@@ -44,7 +44,7 @@ def mgr_requests_view(request):
     manager_id = request.session.get('id', None)
     
     if manager_id is not None:
-        manager_requests = askHR.objects.filter(req_to=manager_id)
+        manager_requests = LeaveRequest.objects.filter(req_to=manager_id)
         
         return render(request, 'mgrreq.html', {'manager_requests': manager_requests})
     else:

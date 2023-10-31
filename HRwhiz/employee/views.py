@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Feedback, askHR, LeaveRequest, Employee
+from django.http import HttpResponse
 
 import uuid
 from HRwhiz.views import session_login_required
@@ -35,10 +36,15 @@ session_login_required
 def ask_hr(request):
     if request.method == 'POST':   
         text=request.POST.get('query')
-        employee = Employee.objects.filter(id=request.session.get('id', None)).first()
+        employee = Employee.objects.get(id=request.session.get('id', None))
         hr=employee.hr_id
-        res=askHR(id=str(uuid.uuid4()),text=text, hr_id = hr)
-        res.save()
+        # print(text, employee, hr)
+        if hr is not None:
+            res=askHR(id=str(uuid.uuid4()),text=text, hr_id = hr)
+            res.save()
+            return redirect("")
+        else:
+            HttpResponse("The employee does not have a HR")
     return render(request,'askHR.html')
 
 session_login_required
@@ -48,12 +54,18 @@ def leave_request(request):
         date_to = request.POST.get('date_to')
         reason = request.POST.get('reason')
 
-        employee = Employee.objects.filter(request.session.get('id', None)).first()
+        employee = Employee.objects.filter(id = request.session.get('id', None)).first()
         mgr_id = employee.manager_id
 
         # Create and save a new LeaveRequest object
-        new_leave_request = LeaveRequest(id=str(uuid.uuid4()),date_from=date_from, date_to=date_to, reason=reason, req_to = mgr_id)
-        new_leave_request.save()
+        if mgr_id is not None:
+            new_leave_request = LeaveRequest(id=str(uuid.uuid4()),date_from=date_from, date_to=date_to, reason=reason, req_to = mgr_id)
+            new_leave_request.save()
+            return redirect("/")
+
+        else:
+            HttpResponse("The employee does not have a Manager")
+
 
     
     return render(request, 'leaverequest.html')

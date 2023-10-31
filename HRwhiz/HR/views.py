@@ -1,17 +1,39 @@
 from django.http import HttpResponse,request
 from employee.models import Employee,Feedback, askHR, LeaveRequest
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from HRwhiz.views import session_login_required
+import requests
+import uuid
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.core.mail import send_mail
 @session_login_required
 def dashboard(request):
     return render(request, 'hr.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation']})
 
+class EmployeeEmailAPI(APIView):
+    def post(self, request):
+        data = request.data
+
+        subject = "Your Employee Login Information"
+        message = f"Hello {data['name']},\n\nYour login email is: {data['email']}\nYour temporary password is: {data['password']}\n\nPlease change your password after initial login."
+        from_email = 'hrwhizapp2023@gmail.com'  # Use your own email address
+        recipient_list = [data['email']]
+
+        try:
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+            return Response({'message': 'Email sent successfully'}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': 'Email sending failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 @session_login_required
 def add_employee(request):
+    response = None
     if request.method == 'POST':
         # Retrieve data from the form
-        id = request.POST.get('id')
+        # id = request.POST.get('id')
         name = request.POST.get('name')
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -25,7 +47,7 @@ def add_employee(request):
 
         # Create and save the Employee object
         employee = Employee(
-            id=id,
+            id=str(uuid.uuid4()),
             name=name,
             email=email,
             password=password,
@@ -38,11 +60,33 @@ def add_employee(request):
             profile_url=profile_url
         )
         employee.save()
+        api_url = 'http://127.0.0.1:8000/HR/api/send_employee_email/'  # Adjust the URL as needed
+        data = {
+            'id': id,
+            'name': name,
+            'email': email,
+            'password': password,
+            'subject':'Test sub'
+        }
+        subject = 'agds'
+        message= 'dhsfhj'
+        from_email = 'hrwhizapp2023@gmail.com'
+        
 
-        # You can also redirect to a success page or return a success message
-        return redirect('/success_page')  # Replace 'success_page' with your actual URL name
+        response = requests.post(api_url, data=data)
 
-    return render(request, 'addemp.html')  # Show the form
+        try:
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+            return HttpResponse({'message': 'Email sent successfully'}, status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+        return render(request, 'addemp.html')
+    # Log the error for debugging
+        # print(f"Email sending error: {str(e)}")
+        # return HttpResponse({'error': 'Email sending failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+    return render(request, 'addemp.html')
 
 @session_login_required
 def success_page(request):

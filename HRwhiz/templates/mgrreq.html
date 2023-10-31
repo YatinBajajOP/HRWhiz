@@ -42,15 +42,21 @@
     <h1>Requests to Manager</h1>
     <ul>
         {% for request in manager_requests %}
-    <div>
-        Request ID: {{ request.id }}<br>
-        Requested by: {{ request.req_by.name }}<br>
-        Type: {{ request.type }}<br>
-        Request Body: {{ request.req_body }}<br>
-        <!-- Add more fields as needed -->
-    </div>
-    <hr>
-{% endfor %}
+        <div>
+            Request ID: {{ request.id }}
+            <br>
+            Requested to: {{ request.req_to }}
+            <br>
+            Date from: {{ request.date_from }}
+            <br>
+            Date to: {{ request.date_to }}
+            <br>
+            Request Body: {{ request.reason }}
+            <br>
+            <!-- Add more fields as needed -->
+        </div>
+        <hr>
+        {% endfor %}
 
     </ul>
 </body>

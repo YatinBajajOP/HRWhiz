@@ -37,7 +37,6 @@ class Department(models.Model):
          default = str(uuid.uuid4()), 
          editable = False) 
     name = models.CharField(max_length=80)
-    # leader_id=models.ForeignKey('Employee',on_delete=models.CASCADE,null=True,blank=True)
 
     class Meta:
         verbose_name_plural='Department'
@@ -49,7 +48,6 @@ class Project(models.Model):
          default = str(uuid.uuid4()), 
          editable = False) 
     name = models.CharField(max_length=80)
-    # leader_id=models.ForeignKey('Employee',on_delete=models.CASCADE,null=True,blank=True)
     did=models.ForeignKey('Department',on_delete=models.CASCADE)
 
     class Meta:
@@ -91,6 +89,3 @@ class LeaveRequest(models.Model):
     req_to = models.ForeignKey('Employee', on_delete=models.CASCADE, default=None)
     class Meta:
         verbose_name_plural='LeaveRequest'
-
-    
-
