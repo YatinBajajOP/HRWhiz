@@ -43,11 +43,11 @@
             <form>
                 <div class="mb-3">
                     <label for="startDate" class="form-label">From Date:</label>
-                    <input type="date" name="date_from" class="form-control" style="width: 9rem" id="date_from" placeholder="Select from date" min="{{ today }}">
+                    <input type="date" name="date_from" class="form-control" style="width: 9rem" id="date_from" placeholder="Select from date" onchange="validateDates()">
                 </div>
                 <div class="mb-3">
                     <label for="endDate" class="form-label">To Date:</label>
-                    <input type="date" name="date_to" class="form-control" style="width: 9rem" id="date_to" placeholder="Select end date" min="{{ today }}">
+                    <input type="date" name="date_to" class="form-control" style="width: 9rem" id="date_to" placeholder="Select end date" onchange="validateDates()">
                 </div>
                 <div class="mb-3">
                     <label for="leavetype">Leave type:</label>
@@ -88,6 +88,32 @@
             menu_btns.forEach(el => el.classList.remove("active"))
             btn.classList.add("active")
         }))
+        function setMinDate(inputId) {
+            var dateInput = document.getElementById(inputId);
+            var currentDate = new Date();
+            var istOffset = 1770; 
+            currentDate.setMinutes(currentDate.getMinutes() + istOffset);
+            var istDate = currentDate.toISOString().split("T")[0];
+            dateInput.setAttribute('min', istDate);
+        }
+        setMinDate("date_from");
+        setMinDate("date_to");
+        function validateDates() {
+            var dateFromInput = document.getElementById("date_from");
+            var dateToInput = document.getElementById("date_to");
+            var submitButton = document.getElementById("submit-button");
+
+            var dateFrom = new Date(dateFromInput.value);
+            var dateTo = new Date(dateToInput.value);
+
+            if (dateTo < dateFrom) {
+                alert("Date To cannot be less than Date From");
+                dateToInput.value = "";  // Clear the Date To field
+                submitButton.disabled = true;
+            } else {
+                submitButton.disabled = false;
+            }
+        }
     </script>
 </body>
 </html>
