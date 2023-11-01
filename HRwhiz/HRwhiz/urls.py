@@ -21,6 +21,7 @@ from . import views
 
 urlpatterns = [
     path("", views.log_in),
+    path('verifyotp/', views.verify_otp, name='verify_otp'),
     path('logout/', views.log_out),
     path("admin/", admin.site.urls),
     # path("linkedin_learning/", redirect('https://www.linkedin.com/learning/')),
