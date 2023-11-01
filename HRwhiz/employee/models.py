@@ -87,5 +87,7 @@ class LeaveRequest(models.Model):
     date_to = models.DateField(auto_now=False, auto_now_add=False)
     reason = models.CharField(max_length=100)
     req_to = models.ForeignKey('Employee', on_delete=models.CASCADE, default=None)
+    type = models.CharField(max_length=30, default="Casual")
+
     class Meta:
         verbose_name_plural='LeaveRequest'

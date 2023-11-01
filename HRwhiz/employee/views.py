@@ -32,7 +32,7 @@ def feedback(request):
     
     return render(request, 'feedback.html')
 
-session_login_required
+@session_login_required
 def ask_hr(request):
     if request.method == 'POST':   
         text=request.POST.get('query')
@@ -47,7 +47,7 @@ def ask_hr(request):
             HttpResponse("The employee does not have a HR")
     return render(request,'askHR.html')
 
-session_login_required
+@session_login_required
 def leave_request(request):
     if request.method == 'POST':
         date_from = request.POST.get('date_from')
@@ -64,8 +64,25 @@ def leave_request(request):
             return redirect("/")
 
         else:
-            HttpResponse("The employee does not have a Manager")
-
-
-    
+            HttpResponse("The employee does not have a Manager")    
     return render(request, 'leaverequest.html')
+
+@session_login_required
+def edit_profile(request):
+    data= Employee.objects.filter(id=request.session.get('id', None))
+    name=data.first().name
+    password=data.first().password
+    email=data.first().email
+    address=data.first().address
+    phone_number=data.first().phone_number
+
+    if request.method=="POST":
+        print("Editing")
+        name=request.POST.get("name")
+        password=request.POST.get("password")
+        email=request.POST.get("email")
+        address=request.POST.get("address")
+        phone_number=request.POST.get("phone_number")
+        data.update(name=name,password=password,email=email,address=address,phone_number=phone_number)
+    
+    return render(request,"editprofile.html",{"name":name,"password":password,"email":email,"address":address,"phone_number":phone_number})

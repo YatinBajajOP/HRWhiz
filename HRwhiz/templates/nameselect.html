@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Select an Employee</h1>
+    <form method="post">
+        <!-- 
+            {
+                department.name: [p.name, ],
+                department2.name
+            }
+         -->
+        {% csrf_token %}
+        <select name="employee">
+            <option value="">Select an employee</option>
+            {% for employee in employees %}
+                <option value="{{ employee.id }}">{{ employee.name }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="department">
+            <option value="">Select a department</option>
+            {% for department in departments %}
+                <option value="{{ department.id }}">{{ department.name }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="project">
+            <option value="">Select a project</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        const data = {{ mapping | safe }}
+        const employee = document.querySelector("select[name=employee]")
+        const department = document.querySelector("select[name=department]")
+        const project = document.querySelector("select[name=project]")
+        const updateProjects = () => {
+            if(!department.value) return
+            project.innerHTML = '<option value="">Select a project</option>'
+            for(p of data[department.value]){
+                let option = document.createElement("option")
+                option.value = p["id"]
+                option.innerText = p["name"]
+                project.appendChild(option)
+            }
+        }
+        department.addEventListener("change", updateProjects)
+    </script>
+</body>
+</html>
