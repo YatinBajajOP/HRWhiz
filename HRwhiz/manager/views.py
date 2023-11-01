@@ -11,7 +11,7 @@ def view_employees(request):
 
 @session_login_required
 def dashboard(request):
-    return render(request, 'mgr.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation']})
+    return render(request, 'mgr.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation'], 'annual_leave': int(request.session['annual_leave']), 'casual_leave': int(request.session['casual_leave']), 'sick_leave': int(request.session['sick_leave'])})
 
 @session_login_required
 def assign_dep_project(request):
@@ -51,6 +51,7 @@ def mgr_requests_view(request):
         # Handle the case where the HR is not logged in or the session is not set
         # You can redirect to a login page or handle it as per your application's logic.
         return render(request, 'mgr.html')
+    
 @session_login_required  
 def mgr_feedback_view(request):
     # Assuming you have stored the HR's ID in the session as 'hr_id'
@@ -81,7 +82,8 @@ def employee_view_status(request):
 
     return render(request, 'empstatus.html', {'employees': employees})
 
-def nameselect(request):
+@session_login_required
+def assign_task(request):
     employees = Employee.objects.filter(designation="Employee")
     departments=Department.objects.all()
     projects=Project.objects.all()

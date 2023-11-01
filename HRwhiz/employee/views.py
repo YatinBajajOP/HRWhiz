@@ -8,7 +8,7 @@ from HRwhiz.views import session_login_required
 # Create your views here.\
 @session_login_required
 def dashboard(request):
-    return render(request, 'emp.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation']})
+    return render(request, 'emp.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation'], 'annual_leave': int(request.session['annual_leave']), 'casual_leave': int(request.session['casual_leave']), 'sick_leave': int(request.session['sick_leave'])})
 
 @session_login_required
 def feedback(request):
@@ -42,7 +42,7 @@ def ask_hr(request):
         if hr is not None:
             res=askHR(id=str(uuid.uuid4()),text=text, hr_id = hr)
             res.save()
-            return redirect("")
+            return redirect("/employee")
         else:
             HttpResponse("The employee does not have a HR")
     return render(request,'askHR.html')

@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "employee",
-    "manager"
+    "manager",
+    "HR"
     # 'rest_framework',
     # 'rest_framework.authtoken',
     # 'rest_framework_jwt',

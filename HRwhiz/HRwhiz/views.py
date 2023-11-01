@@ -40,7 +40,9 @@ def log_in(request):
                 request.session['name'] = user.name
                 request.session['id'] = user.id
                 request.session['designation'] = user.designation
-                request.session['status'] = user.status
+                request.session['sick_leave'] = user.sick_leave
+                request.session['casual_leave'] = user.casual_leave
+                request.session['annual_leave'] = user.annual_leave
 
                 # Store the OTP in the dictionary
                 otp_dict[user.id] = otp_code

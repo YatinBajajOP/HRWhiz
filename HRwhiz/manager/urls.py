@@ -9,5 +9,6 @@ urlpatterns=[
     path('mgrfeedbackview/',views.mgr_feedback_view),
     path('employeeviewstatus/',views.employee_view_status),
     path('', views.dashboard),
-    path("assigntask/",views.nameselect),
+    path("assigntask/",views.assign_task),
+
 ]

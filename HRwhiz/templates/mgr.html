@@ -76,7 +76,7 @@
                 </td>
                 <td></td>
                 <td>
-                  12
+                  {{sick_leave}}
                 </td>
               </tr>  
               <tr>
@@ -85,7 +85,7 @@
                 </td>
                 <td></td>
                 <td>
-                  5
+                  {{casual_leave}}
                 </td>
               </tr> 
               <tr>
@@ -94,7 +94,7 @@
                 </td>
                 <td></td>
                 <td>
-                  5
+                  {{annual_leave}}
                 </td>
               </tr>             
             </table></div>
@@ -148,11 +148,14 @@
       
       // Draw the chart and set the chart values
       function drawChart() {
+        const casual = {{casual_leave | safe}}
+        const annual = {{annual_leave | safe}}
+        const sick = {{sick_leave | safe}}
         var data = google.visualization.arrayToDataTable([
         ['Leave Type', 'Leaves'],
-        ['Casual', 5],
-        ['Annual', 5],
-        ['Sick', 12]  
+        ['Casual', casual],
+        ['Annual', annual],
+        ['Sick', sick]  
       ]);
       
         // Optional; add a title and set the width and height of the chart

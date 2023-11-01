@@ -11,7 +11,7 @@ from rest_framework import status
 from django.core.mail import send_mail
 @session_login_required
 def dashboard(request):
-    return render(request, 'hr.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation']})
+    return render(request, 'hr.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation'], 'annual_leave': int(request.session['annual_leave']), 'casual_leave': int(request.session['casual_leave']), 'sick_leave': int(request.session['sick_leave'])})
 
 class EmployeeEmailAPI(APIView):
     def post(self, request):
