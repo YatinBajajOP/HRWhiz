@@ -81,3 +81,25 @@ def employee_view_status(request):
 
     return render(request, 'empstatus.html', {'employees': employees})
 
+def nameselect(request):
+    employees = Employee.objects.filter(designation="Employee")
+    departments=Department.objects.all()
+    projects=Project.objects.all()
+
+    mapping = {}
+
+    for department in departments:
+        projects = Project.objects.filter(did = department.id)
+        mapping[department.id] = [{"name": project.name, "id": project.id} for project in projects]
+
+
+    if request.method=="POST":
+        data=Employee.objects.all()
+        pid=request.POST.get('project')
+        did=request.POST.get('department')
+        data.update(pid=pid,did=did)
+    
+    print(mapping)
+
+    return render(request,'nameselect.html', {"employees": employees,"departments":departments,"projects":projects, "mapping":mapping})
+
