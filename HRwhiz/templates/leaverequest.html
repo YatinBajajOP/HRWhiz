@@ -40,7 +40,8 @@
 
         <div class="container mt-5">
             <h2 class="mb-4">Leave Request Form</h2>
-            <form>
+            <form method="post">
+                {% csrf_token %}
                 <div class="mb-3">
                     <label for="startDate" class="form-label">From Date:</label>
                     <input type="date" name="date_from" class="form-control" style="width: 9rem" id="date_from" placeholder="Select from date" onchange="validateDates()">
@@ -51,7 +52,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="leavetype">Leave type:</label>
-                    <select class="form-control" style="width: 9rem" id="employeeName">
+                    <select class="form-control" style="width: 9rem" id="employeeName" name="leavetype">
                         <option value="annual">Annual</option>
                         <option value="casual">Casual</option>
                         <option value="sick">Sick</option>
@@ -76,6 +77,16 @@
 
     <!-- Initialize Datepickers -->
     <script>
+        function setMinDate(inputId) {
+            var dateInput = document.getElementById(inputId);
+            var currentDate = new Date();
+            var istOffset = 1770; 
+            currentDate.setMinutes(currentDate.getMinutes() + istOffset);
+            var istDate = currentDate.toISOString().split("T")[0];
+            dateInput.setAttribute('min', istDate);
+        }
+        setMinDate("date_from");
+        setMinDate("date_to");
         // Initialize start date datepicker
         $('.datepicker').datepicker({
             autoclose: true,
@@ -88,16 +99,7 @@
             menu_btns.forEach(el => el.classList.remove("active"))
             btn.classList.add("active")
         }))
-        function setMinDate(inputId) {
-            var dateInput = document.getElementById(inputId);
-            var currentDate = new Date();
-            var istOffset = 1770; 
-            currentDate.setMinutes(currentDate.getMinutes() + istOffset);
-            var istDate = currentDate.toISOString().split("T")[0];
-            dateInput.setAttribute('min', istDate);
-        }
-        setMinDate("date_from");
-        setMinDate("date_to");
+        
         function validateDates() {
             var dateFromInput = document.getElementById("date_from");
             var dateToInput = document.getElementById("date_to");

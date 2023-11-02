@@ -53,15 +53,16 @@ def leave_request(request):
         date_from = request.POST.get('date_from')
         date_to = request.POST.get('date_to')
         reason = request.POST.get('reason')
+        type = request.POST.get('leavetype')
 
         employee = Employee.objects.filter(id = request.session.get('id', None)).first()
         mgr_id = employee.manager_id
 
         # Create and save a new LeaveRequest object
         if mgr_id is not None:
-            new_leave_request = LeaveRequest(id=str(uuid.uuid4()),date_from=date_from, date_to=date_to, reason=reason, req_to = mgr_id)
+            new_leave_request = LeaveRequest(id=str(uuid.uuid4()),date_from=date_from, date_to=date_to, reason=reason, req_to = mgr_id, type=type)
             new_leave_request.save()
-            return redirect("/")
+            return redirect("/employee")
 
         else:
             HttpResponse("The employee does not have a Manager")    
