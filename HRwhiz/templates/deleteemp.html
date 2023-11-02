@@ -16,7 +16,15 @@
     <nav class="navbar navbar-expand-lg shadow-sm">
     <img class="icon img-fluid rounded-circle"  src="/static/img/people-profile-graphic_24911-21373.jpg.avif" />
         <div class="container">
-            <a class="navbar-brand" href="/emp/">HRWhiz</a>       
+            {% if designation == 'Manager' %}
+      <a class="navbar-brand" href="/manager/">HRWhiz</a>       
+      {% endif %}
+      {% if designation == 'Employee' %}
+      <a class="navbar-brand" href="/employee/">HRWhiz</a>       
+      {% endif %}
+      {% if designation == 'HR' %}
+      <a class="navbar-brand" href="/HR/">HRWhiz</a>       
+      {% endif %} 
             <div class="collapse navbar-collapse"  id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                         <div>

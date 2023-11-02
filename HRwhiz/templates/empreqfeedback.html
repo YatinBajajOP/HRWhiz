@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Employees Requests</title>
+    <style>
+      /* Add your CSS styles here */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        margin: 5px;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .request-header {
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .request-type {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Feedbacks To Employees</h1>
+    <ul>
+      {% for request in emp_requests %}
+      <div>
+        Request ID: {{ request.id }}<br />
+        Requested by: {{ request.fed_by_by.name }}<br />
+        Type: {{ request.type }}<br />
+        Request Body: {{ request.fed_body }}<br />
+        <!-- Add more fields as needed -->
+      </div>
+      <hr />
+      {% endfor %}
+    </ul>
+  </body>
+</html>

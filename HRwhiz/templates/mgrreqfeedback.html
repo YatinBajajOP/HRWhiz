@@ -14,10 +14,17 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg shadow-sm">
-     <a href="/viewprofile/"><img class="icon img-fluid rounded-circle" src="/static/img/people-profile-graphic_24911-21373.jpg.avif" /></a> 
+     <a href="/manager/profile"><img class="icon img-fluid rounded-circle" src="/static/img/people-profile-graphic_24911-21373.jpg.avif" /></a> 
         <div class="container">
+            {% if designation == 'Manager' %}
+            <a class="navbar-brand" href="/manager/">HRWhiz</a>       
+            {% endif %}
+            {% if designation == 'Employee' %}
             <a class="navbar-brand" href="/employee/">HRWhiz</a>       
-
+            {% endif %}
+            {% if designation == 'HR' %}
+            <a class="navbar-brand" href="/HR/">HRWhiz</a>       
+            {% endif %}
                 
                       <ul class="navbar-nav ms-auto">
                          
@@ -35,7 +42,7 @@
     <div class="layout">
     <div class="row">
       <div class="menu">
-        <div class="active"><a href="/employee/"><img class="img nav-icon" src="/static/img/home-alt-3-svgrepo-com.svg" /></a></div>  
+        <div class="active"><a href="/manager/"><img class="img nav-icon" src="/static/img/home-alt-3-svgrepo-com.svg" /></a></div>  
         <div><a href="/employee/askhr"><img class="img nav-icon" src="/static/img/folder-svgrepo-com.svg" /></a></div>
         <div><a href="/employee/feedback"><img class="img nav-icon" src="/static/img/mail-open-svgrepo-com.svg" /></a></div>
         

@@ -37,7 +37,7 @@ def feedback(request):
         res=Feedback(id=str(uuid.uuid4()),fed_to=fed_to, fed_by=employee, fed_body=des, type='Feedback')
         res.save()
     
-    return render(request, 'feedback.html')
+    return render(request, 'feedback.html',{'designation':request.session['designation'], 'name': request.session['name']})
 
 @session_login_required
 def ask_hr(request):
@@ -52,7 +52,7 @@ def ask_hr(request):
             return redirect("/employee")
         else:
             HttpResponse("The employee does not have a HR")
-    return render(request,'askHR.html')
+    return render(request,'askHR.html',{'designation':request.session['designation'], 'name': request.session['name']})
 
 @session_login_required
 def leave_request(request):
@@ -77,7 +77,7 @@ def leave_request(request):
                 return redirect("/HR")
         else:
             HttpResponse("The employee does not have a Manager")    
-    return render(request, 'leaverequest.html',{"designation":request.session['designation']})
+    return render(request, 'leaverequest.html',{"designation":request.session['designation'], 'name': request.session['name']})
 
 @session_login_required
 def edit_profile(request):
@@ -89,7 +89,7 @@ def edit_profile(request):
     phone_number=data.first().phone_number
 
     if request.method=="POST":
-        print("Editing")
+        # print("Editing")
         name=request.POST.get("name")
         password=request.POST.get("password")
         email=request.POST.get("email")
@@ -97,4 +97,4 @@ def edit_profile(request):
         phone_number=request.POST.get("phone_number")
         data.update(name=name,password=password,email=email,address=address,phone_number=phone_number)
     
-    return render(request,"editprofile.html",{"name":name,"password":password,"email":email,"address":address,"phone_number":phone_number})
+    return render(request,"profile.html",{"name":name,"password":password,"email":email,"address":address,"phone_number":phone_number, "designation":request.session['designation']})

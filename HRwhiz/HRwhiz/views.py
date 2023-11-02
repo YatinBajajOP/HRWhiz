@@ -9,7 +9,7 @@ def session_login_required(function=None, session_key='id'):
     def decorator(view_func):
         @wraps(view_func)
         def f(request, *args, **kwargs):
-            print(request.session.keys())
+            # print(request.session.keys())
             if session_key in request.session:
                 return view_func(request, *args, **kwargs)
             return redirect('/')
@@ -70,10 +70,10 @@ def verify_otp(request):
         
         if user_id in otp_dict:
             otp= otp_dict[user_id]
-            print(otp)
+            # print(otp)
             if otp == entered_otp:
                 designation = request.session.get('designation', None)
-                print(designation)
+                # print(designation)
                 # Updating the status of logged in user
                 obj = Employee.objects.get(id=user_id)
                 obj.status = True

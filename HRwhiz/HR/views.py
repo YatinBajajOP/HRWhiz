@@ -80,13 +80,13 @@ def add_employee(request):
             return HttpResponse({'message': 'Email sent successfully'}, status=status.HTTP_200_OK)
         except Exception as e:
             print(e)
-        return render(request, 'addemp.html')
+        return render(request, 'addemp.html',{'designation':request.session['designation'], 'name': request.session['name']})
     # Log the error for debugging
         # print(f"Email sending error: {str(e)}")
         # return HttpResponse({'error': 'Email sending failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-    return render(request, 'addemp.html')
+    return render(request, 'addemp.html',{'designation':request.session['designation'], 'name': request.session['name']})
 
 @session_login_required
 def success_page(request):
@@ -106,7 +106,7 @@ def delete_employee(request):
     else:
         error_message = None
 
-    return render(request, 'deleteemp.html', {'error_message': error_message})
+    return render(request, 'deleteemp.html', {'error_message': error_message,'designation':request.session['designation'], 'name': request.session['name']})
 
 @session_login_required
 def hr_requests_view(request):
@@ -115,13 +115,13 @@ def hr_requests_view(request):
     
     if hr_id is not None:
         # Filter requests where req_to matches the logged-in HR's ID
-        hr_requests = askHR.objects.filter(req_to=hr_id)
+        hr_requests = askHR.objects.filter(hr_id=hr_id)
         
-        return render(request, 'req.html', {'hr_requests': hr_requests})
+        return render(request, 'req.html', {'hr_requests': hr_requests,'designation':request.session['designation'], 'name': request.session['name']})
     else:
         # Handle the case where the HR is not logged in or the session is not set
         # You can redirect to a login page or handle it as per your application's logic.
-        return render(request, 'hr.html')
+        return render(request, 'hr.html',)
 
 @session_login_required  
 def hr_feedback_view(request):
@@ -132,30 +132,63 @@ def hr_feedback_view(request):
         # Filter requests where req_to matches the logged-in HR's ID
         hr_requests = Feedback.objects.filter(fed_to=hr_id)
         
-        return render(request, 'reqfeedback.html', {'hr_requests': hr_requests})
+        return render(request, 'reqfeedback.html', {'hr_requests': hr_requests,'designation':request.session['designation'], 'name': request.session['name']})
     else:
         # Handle the case where the HR is not logged in or the session is not set
         # You can redirect to a login page or handle it as per your application's logic.
         return render(request, 'hr.html')
 
+# @session_login_required
+# def assign_manager(request):
+#     if request.method == 'POST':
+#         employee_id = request.POST['employee_id']
+#         manager_id = request.POST['manager_id']
+
+#         try:
+#             # Retrieve the employee and manager instances
+#             employee = Employee.objects.get(id=employee_id)
+#             manager = Employee.objects.get(id=manager_id)
+
+#             # Assign the manager to the employee
+#             employee.manager_id = manager
+#             employee.save()
+
+#             return HttpResponse('Manager Assigned')  
+#         except Employee.DoesNotExist:
+#             # Handle the case where employee or manager is not found
+#             return HttpResponse('Employee or Manager Not Exists')
+
+#     return render(request, 'addmanager.html',{'designation':request.session['designation']})
+
 @session_login_required
 def assign_manager(request):
+    employees=Employee.objects.filter(designation="Employee")
+    emps=Employee.objects.filter(designation="Manager")
     if request.method == 'POST':
-        employee_id = request.POST['employee_id']
-        manager_id = request.POST['manager_id']
+        employee_id = request.POST.get("employee_id")
+        mgr_id = request.POST.get("manager_id")
 
-        try:
-            # Retrieve the employee and manager instances
-            employee = Employee.objects.get(id=employee_id)
-            manager = Employee.objects.get(id=manager_id)
+        emp_data=Employee.objects.filter(id=employee_id)
+        emp_data.update(manager_id=mgr_id)
 
-            # Assign the manager to the employee
-            employee.manager_id = manager
-            employee.save()
+    return render(request, 'addmanager.html',{"employees":employees,"emps":emps, 'designation':request.session['designation'], 'name': request.session['name']})
 
-            return HttpResponse('Manager Assigned')  
-        except Employee.DoesNotExist:
-            # Handle the case where employee or manager is not found
-            return HttpResponse('Employee or Manager Not Exists')
+@session_login_required
+def edit_profile(request):
+    data= Employee.objects.filter(id=request.session.get('id', None))
+    name=data.first().name
+    password=data.first().password
+    email=data.first().email
+    address=data.first().address
+    phone_number=data.first().phone_number
 
-    return render(request, 'addmanager.html')
+    if request.method=="POST":
+        # print("Editing")
+        name=request.POST.get("name")
+        password=request.POST.get("password")
+        email=request.POST.get("email")
+        address=request.POST.get("address")
+        phone_number=request.POST.get("phone_number")
+        data.update(name=name,password=password,email=email,address=address,phone_number=phone_number)
+    
+    return render(request,"profile.html",{"name":name,"password":password,"email":email,"address":address,"phone_number":phone_number, "designation":request.session['designation']})
