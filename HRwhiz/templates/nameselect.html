@@ -99,7 +99,7 @@
     <form method="post">      
         <div class="container mt-5">
             <div class="row">
-                <div class="col-md-4">
+                <div class="">
                     <div class="form-group">
                         <label for="employeeName">Employee Name:</label>
                         <!-- <select class="form-control" id="employeeName">
@@ -115,15 +115,10 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="">
                     <div class="form-group">
                         <label for="departmentName">Department Name:</label>
-                        <!-- <select class="form-control" id="departmentName">
-                            <option value="">Select Department</option>
-                            {%for a in data%}
-                            <option value="department1">Department 1</option>
-                            <option value="department2">Department 2</option>
-                        </select> -->
+                        
                         <select name="department">
                             <option value="">Select a department</option>
                             {% for department in departments %}
@@ -134,18 +129,14 @@
 
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="">
                     <div class="form-group">
                         <label for="projectName">Project Name:</label>
-                        <!-- <select class="form-control" id="projectName">
-                            <option value="">Select Project</option>
-                            <option value="project1">Project 1</option>
-                            <option value="project2">Project 2</option>
-                        </select> -->
+                        
                         <select name="project">
                             <option value="">Select a project</option>
                         </select>
-                        <input type="submit" value="Submit">
+                        <!-- <input type="submit" value="Submit"> -->
                     </div>
                 </div>
             </div>

@@ -53,7 +53,7 @@
                             <div class="card col shadow-sm" style="max-width: 26rem; padding: 2.5rem;">
                                 <div class="card-body">
                                 <img class="img" src="/static/img/askhr.png" />
-                                  <a href="/employee/ask_hr" class="card-title"><h5>Ask HR</h5></a>
+                                  <a href="/employee/askhr" class="card-title"><h5>Ask HR</h5></a>
                                   <h6 class="card-subtitle mb-2 text-body-secondary">Send your queries</h6>
                                 </div>
                               </div>
@@ -105,7 +105,7 @@
                 </td>
                 <td></td>
                 <td>
-                  12
+                  {{sick_leave}}
                 </td>
               </tr>  
               <tr>
@@ -114,7 +114,7 @@
                 </td>
                 <td></td>
                 <td>
-                  5
+                  {{casual_leave}}
                 </td>
               </tr> 
               <tr>
@@ -123,7 +123,7 @@
                 </td>
                 <td></td>
                 <td>
-                  5
+                  {{annual_leave}}
                 </td>
               </tr>             
             </table></div>
@@ -186,11 +186,14 @@
       
       // Draw the chart and set the chart values
       function drawChart() {
+        const casual = {{casual_leave | safe}}
+        const annual = {{annual_leave | safe}}
+        const sick = {{sick_leave | safe}}
         var data = google.visualization.arrayToDataTable([
         ['Leave Type', 'Leaves'],
-        ['Casual', 5],
-        ['Annual', 5],
-        ['Sick', 12]  
+        ['Casual', casual],
+        ['Annual', annual],
+        ['Sick', sick]  
       ]);
       
         // Optional; add a title and set the width and height of the chart
