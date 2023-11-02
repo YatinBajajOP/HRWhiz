@@ -151,10 +151,10 @@
                     <label for="{{ form.fed_to.id_for_label }}">Feedback to:</label>
                     <select class="form-control" id="{{ form.fed_to.id_for_label }}" name="selection-value"  style="width: 16rem">
                         <!-- Add employee names dynamically here -->
-                        <option value="manage">Manager</option>
-                        <option value="hr">HR</option>
+                        <option value="Manager">Manager</option>
+                        <option value="HR">HR</option>
                         {% if designation == 'Manager' %}
-                        <option value="employee"> Employee </option>
+                        <option value="Employee"> Employee </option>
                         {% endif %}
                     </select>
             </div>

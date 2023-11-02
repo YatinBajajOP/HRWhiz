@@ -21,13 +21,20 @@ def feedback(request):
                 fed_to = employee.hr_id
             else:
                 fed_to = None
+
+        elif request.POST.get('selection-value') == 'Employee':
+            if employee:
+                fed_to = employee.hr_id
+            else:
+                fed_to = None
+
         else:
            if employee:
                 fed_to = employee.manager_id
            else:
                 fed_to = None
 
-        res=Feedback(id=str(uuid.uuid4()),fed_to=fed_to,fed_by=employee,fed_body=des, type='Feedback')
+        res=Feedback(id=str(uuid.uuid4()),fed_to=fed_to, fed_by=employee, fed_body=des, type='Feedback')
         res.save()
     
     return render(request, 'feedback.html')
