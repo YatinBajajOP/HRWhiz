@@ -37,7 +37,7 @@ def feedback(request):
         res=Feedback(id=str(uuid.uuid4()),fed_to=fed_to, fed_by=employee, fed_body=des, type='Feedback')
         res.save()
     
-    return render(request, 'feedback.html',{'designation':request.session['designation'], 'name': request.session['name']})
+    return render(request, 'feedback.html', {'designation':request.session['designation'], 'name': request.session['name']})
 
 @session_login_required
 def ask_hr(request):
@@ -97,4 +97,19 @@ def edit_profile(request):
         phone_number=request.POST.get("phone_number")
         data.update(name=name,password=password,email=email,address=address,phone_number=phone_number)
     
-    return render(request,"profile.html",{"name":name,"password":password,"email":email,"address":address,"phone_number":phone_number, "designation":request.session['designation']})
+    return render(request,"profile.html", {"name":name,"password":password,"email":email,"address":address,"phone_number":phone_number, "designation":request.session['designation']})
+
+@session_login_required
+def view_pr(request):
+    # Assuming you have stored the HR's ID in the session as 'hr_id'
+    employee_id = request.session.get('id', None)
+
+    if employee_id is not None:
+        # Filter requests where req_to matches the logged-in HR's ID
+        emp_requests = Feedback.objects.filter(fed_to=employee_id)
+
+        return render(request, 'viewpr.html', {'emp_requests': emp_requests})
+    else:
+        # Handle the case where the HR is not logged in or the session is not set
+        # You can redirect to a login page or handle it as per your application's logic.
+        return render(request, 'mgr.html')
