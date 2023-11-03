@@ -80,24 +80,24 @@
             {% csrf_token %}
             <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>
-                <input type="text" class="form-control" id="name" name="name" value={{name}} maxlength="50" readonly>
+                <input type="text" class="form-control" id="name" name="name" value="{{name}}" maxlength="50" readonly>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password:</label>
-                <input type="text" class="form-control" id="password" name="password" value={{password}} readonly>
+                <input type="text" class="form-control" id="password" name="password" value="{{password}}" readonly>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" value={{email}} readonly>
+                <input type="email" class="form-control" id="email" name="email" value="{{email}}" readonly>
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address:</label>
-                <input type="text" class="form-control" id="address" name= "address" value={{address}} readonly>
+                <input type="text" class="form-control" id="address" name= "address" value="{{address}}" readonly>
             </div>
             
             <div class="mb-3">
                 <label for="phone_number" class="form-label">phone_number</label>
-                <input type="number" class="form-control" id="phone_number" name="phone_number" value={{phone_number}} readonly>
+                <input type="number" class="form-control" id="phone_number" name="phone_number" value="{{phone_number}}" readonly>
             </div>
             <div class="row" style="width: 12rem">
             <a href="/employee/profile/" type="button" class="btn btn-light col" id="cancelBtn" style="border-radius: 0%; display: none;">Cancel</a>
