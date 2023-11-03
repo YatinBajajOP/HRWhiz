@@ -96,7 +96,7 @@ def edit_profile(request):
         phone_number=request.POST.get("phone_number")
         data.update(name=name,password=password,email=email,address=address,phone_number=phone_number)
     
-    return render(request,"profile.html",{"name":name,"password":password,"email":email,"address":address,"phone_number":phone_number, "designation":request.session['designation']})
+    return render(request,"profile.html",{"name":name,"password":password,"email":email,"address":address,"phone_number":phone_number, "designation":request.session['designation'], 'annual_leave': int(request.session['annual_leave']), 'casual_leave': int(request.session['casual_leave']), 'sick_leave': int(request.session['sick_leave'])})
 
 
 
