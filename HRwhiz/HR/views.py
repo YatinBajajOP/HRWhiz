@@ -60,7 +60,7 @@ def add_employee(request):
             profile_url=profile_url
         )
         employee.save()
-        api_url = 'http://127.0.0.1:8000/HR/api/send_employee_email/'  # Adjust the URL as needed
+        api_url = '/HR/api/send_employee_email/'  # Adjust the URL as needed
         data = {
             'id': id,
             'name': name,
