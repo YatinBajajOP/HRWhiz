@@ -58,6 +58,7 @@
                     <th scope="col">Requested By</th>
                     <th scope="col">Type</th>
                     <th scope="col">Query</th>
+                    <th scope="col">Feedback Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,6 +68,7 @@
                     <td>{{ request.fed_by.name }}</td>
                     <td>{{ request.type }}</td>
                     <td>{{ request.fed_body }}</td>
+                    <td>{{ request.date }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

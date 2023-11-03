@@ -63,7 +63,7 @@ class Feedback(models.Model):
     fed_to=models.ForeignKey('Employee',on_delete=models.CASCADE,related_name='recieved_feedback', null=True, blank=True)
     type=models.CharField(max_length=50)
     fed_body=models.CharField(max_length=50)
-    
+    date=models.CharField(max_length=10,blank=True,null=True)
     class Meta:
         verbose_name_plural='Feedback'
 
@@ -74,6 +74,7 @@ class askHR(models.Model):
         editable = False) 
     text=models.TextField()
     hr_id = models.ForeignKey('Employee', on_delete=models.CASCADE, default=None)
+    date=models.CharField(max_length=10,blank=True,null=True)
     class Meta:
         verbose_name_plural='AskHR'
         

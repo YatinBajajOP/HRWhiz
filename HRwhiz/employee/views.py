@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Feedback, askHR, LeaveRequest, Employee
 from django.http import HttpResponse
-
+from datetime import datetime
 import uuid
 from HRwhiz.views import session_login_required
 
@@ -15,7 +15,7 @@ def feedback(request):
     if request.method == 'POST':       
         des=request.POST.get('description')
         employee = Employee.objects.filter(id=request.session.get('id', None)).first()
-        
+        current_date=str(datetime.now().date())
         if request.POST.get('selection-value') == 'HR':
             if employee:
                 fed_to = employee.hr_id
@@ -34,7 +34,7 @@ def feedback(request):
            else:
                 fed_to = None
 
-        res=Feedback(id=str(uuid.uuid4()),fed_to=fed_to, fed_by=employee, fed_body=des, type='Feedback')
+        res=Feedback(id=str(uuid.uuid4()),fed_to=fed_to, fed_by=employee, fed_body=des, type='Feedback',date=current_date)
         res.save()
     
     return render(request, 'feedback.html', {'designation':request.session['designation'], 'name': request.session['name']})
@@ -45,9 +45,10 @@ def ask_hr(request):
         text=request.POST.get('query')
         employee = Employee.objects.get(id=request.session.get('id', None))
         hr=employee.hr_id
+        current_date=str(datetime.now().date())
         # print(text, employee, hr)
         if hr is not None:
-            res=askHR(id=str(uuid.uuid4()),text=text, hr_id = hr)
+            res=askHR(id=str(uuid.uuid4()),text=text, hr_id = hr,date=current_date)
             res.save()
             return redirect("/employee")
         else:
@@ -103,7 +104,7 @@ def edit_profile(request):
 def view_pr(request):
     # Assuming you have stored the HR's ID in the session as 'hr_id'
     employee_id = request.session.get('id', None)
-
+    current_date=str(datetime.now().date())
     if employee_id is not None:
         # Filter requests where req_to matches the logged-in HR's ID
         emp_requests = Feedback.objects.filter(fed_to=employee_id)
