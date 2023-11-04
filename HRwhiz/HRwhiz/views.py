@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from functools import wraps
+
 def session_login_required(function=None, session_key='id'):
     def decorator(view_func):
         @wraps(view_func)
@@ -89,7 +90,6 @@ def verify_otp(request):
 
     return HttpResponse("Invalid OTP. Please try again.")
 
-    
 
 def log_out(request):
     obj = Employee.objects.get(id=request.session.get('id', None))

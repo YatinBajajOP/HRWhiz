@@ -48,7 +48,7 @@ def ask_hr(request):
         current_date=str(datetime.now().date())
         # print(text, employee, hr)
         if hr is not None:
-            res=askHR(id=str(uuid.uuid4()),text=text, hr_id = hr,date=current_date)
+            res=askHR(id=str(uuid.uuid4()),text=text, hr_id = hr, date=current_date)
             res.save()
             return redirect("/employee")
         else:
@@ -72,9 +72,9 @@ def leave_request(request):
             new_leave_request.save()
             if (request.session['designation']=='Manager'):
                 return redirect("/manager")
-            if (request.session['designation']=='Employee'):
+            elif (request.session['designation']=='Employee'):
                 return redirect("/employee")
-            if (request.session['designation']=='HR'):
+            elif (request.session['designation']=='HR'):
                 return redirect("/HR")
         else:
             HttpResponse("The employee does not have a Manager")    
@@ -104,7 +104,6 @@ def edit_profile(request):
 def view_pr(request):
     # Assuming you have stored the HR's ID in the session as 'hr_id'
     employee_id = request.session.get('id', None)
-    current_date=str(datetime.now().date())
     if employee_id is not None:
         # Filter requests where req_to matches the logged-in HR's ID
         emp_requests = Feedback.objects.filter(fed_to=employee_id)
