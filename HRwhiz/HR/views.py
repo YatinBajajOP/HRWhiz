@@ -1,4 +1,5 @@
 from django.http import HttpResponse,request
+from django.contrib.auth.hashers import make_password
 from employee.models import Employee,Feedback, askHR, LeaveRequest
 from django.shortcuts import render
 from HRwhiz.views import session_login_required
@@ -50,7 +51,7 @@ def add_employee(request):
             id=str(uuid.uuid4()),
             name=name,
             email=email,
-            password=password,
+            password=make_password(password),
             address=address,
             designation=designation,
             sick_leave=sick_leave,
@@ -138,28 +139,6 @@ def hr_feedback_view(request):
         # You can redirect to a login page or handle it as per your application's logic.
         return render(request, 'hr.html')
 
-# @session_login_required
-# def assign_manager(request):
-#     if request.method == 'POST':
-#         employee_id = request.POST['employee_id']
-#         manager_id = request.POST['manager_id']
-
-#         try:
-#             # Retrieve the employee and manager instances
-#             employee = Employee.objects.get(id=employee_id)
-#             manager = Employee.objects.get(id=manager_id)
-
-#             # Assign the manager to the employee
-#             employee.manager_id = manager
-#             employee.save()
-
-#             return HttpResponse('Manager Assigned')  
-#         except Employee.DoesNotExist:
-#             # Handle the case where employee or manager is not found
-#             return HttpResponse('Employee or Manager Not Exists')
-
-#     return render(request, 'addmanager.html',{'designation':request.session['designation']})
-
 @session_login_required
 def assign_manager(request):
     employees=Employee.objects.filter(designation="Employee")
@@ -189,6 +168,6 @@ def edit_profile(request):
         email=request.POST.get("email")
         address=request.POST.get("address")
         phone_number=request.POST.get("phone_number")
-        data.update(name=name,password=password,email=email,address=address,phone_number=phone_number)
+        data.update(name=name,password=make_password(password),email=email,address=address,phone_number=phone_number)
     
     return render(request,"profile.html",{"name":name,"password":password,"email":email,"address":address,"phone_number":phone_number, "designation":request.session['designation'],  'annual_leave': int(request.session['annual_leave']), 'casual_leave': int(request.session['casual_leave']), 'sick_leave': int(request.session['sick_leave'])})

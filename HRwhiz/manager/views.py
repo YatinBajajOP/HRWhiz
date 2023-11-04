@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
+from django.contrib.auth.hashers import make_password
+
 from employee.models import *
 from HRwhiz.views import session_login_required
+
 
 # Create your views here.
 # manager views
@@ -94,7 +97,7 @@ def edit_profile(request):
         email=request.POST.get("email")
         address=request.POST.get("address")
         phone_number=request.POST.get("phone_number")
-        data.update(name=name,password=password,email=email,address=address,phone_number=phone_number)
+        data.update(name=name,password=make_password(password),email=email,address=address,phone_number=phone_number)
     
     return render(request,"profile.html",{"name":name,"password":password,"email":email,"address":address,"phone_number":phone_number, "designation":request.session['designation'], 'annual_leave': int(request.session['annual_leave']), 'casual_leave': int(request.session['casual_leave']), 'sick_leave': int(request.session['sick_leave'])})
 

@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from functools import wraps
+from django.contrib.auth.hashers import check_password
 
 def session_login_required(function=None, session_key='id'):
     def decorator(view_func):
@@ -34,33 +35,36 @@ def log_in(request):
         password = request.POST.get('password')
         
         try:
-            user = Employee.objects.get(email=email, password=password)
+            user = Employee.objects.get(email=email)
             
             if user is not None:
                 # Store user data and OTP in the dictionary
-                request.session['name'] = user.name
-                request.session['id'] = user.id
-                request.session['designation'] = user.designation
-                request.session['sick_leave'] = user.sick_leave
-                request.session['casual_leave'] = user.casual_leave
-                request.session['annual_leave'] = user.annual_leave
+                if check_password(password, user.password):
+                    request.session['name'] = user.name
+                    request.session['id'] = user.id
+                    request.session['designation'] = user.designation
+                    request.session['sick_leave'] = user.sick_leave
+                    request.session['casual_leave'] = user.casual_leave
+                    request.session['annual_leave'] = user.annual_leave
 
-                # Store the OTP in the dictionary
-                otp_dict[user.id] = otp_code
+                    # Store the OTP in the dictionary
+                    otp_dict[user.id] = otp_code
 
-                # Send the OTP via email
-                subject = 'Your OTP for Login'
-                message = f'Your OTP is: {otp_code}'
-                from_email = 'hrwhizapp2023@gmail.com'  # Replace with your email
-                recipient_list = [user.email]
-                
-                send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+                    # Send the OTP via email
+                    subject = 'Your OTP for Login'
+                    message = f'Your OTP is: {otp_code}'
+                    from_email = 'hrwhizapp2023@gmail.com'  # Replace with your email
+                    recipient_list = [user.email]
+                    
+                    send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
-                # Redirect to OTP verification page
-                return render(request, 'verify_otp.html')
+                    # Redirect to OTP verification page
+                    return render(request, 'verify_otp.html')
+                else:
+                    return HttpResponse("Invalid password")
                 
         except Employee.DoesNotExist:
-            return HttpResponse("Invalid email or password")
+            return HttpResponse("Invalid email")
 
     return render(request, 'login.html')
 

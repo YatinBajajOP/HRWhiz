@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.hashers import make_password
 from .models import Feedback, askHR, LeaveRequest, Employee
 from django.http import HttpResponse
 from datetime import datetime
@@ -94,7 +95,7 @@ def edit_profile(request):
         email=request.POST.get("email")
         address=request.POST.get("address")
         phone_number=request.POST.get("phone_number")
-        data.update(name=name,password=password,email=email,address=address,phone_number=phone_number)
+        data.update(name=name,password=make_password(password),email=email,address=address,phone_number=phone_number)
     
     return render(request,"profile.html", {"name":name,"password":password,"email":email,"address":address,"phone_number":phone_number, "designation":request.session['designation'],  'annual_leave': int(request.session['annual_leave']), 'casual_leave': int(request.session['casual_leave']), 'sick_leave': int(request.session['sick_leave'])})
 
