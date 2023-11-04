@@ -1,3 +1,4 @@
 dj-database-url
 psycopg2
 Django==4.0.0
+gunicorn==21.2.0
