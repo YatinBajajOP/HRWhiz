@@ -21,13 +21,11 @@ def feedback(request):
                 fed_to = employee.hr_id
             else:
                 fed_to = None
-
         elif request.POST.get('selection-value') == 'Employee':
             if employee:
                 fed_to = employee.hr_id
             else:
                 fed_to = None
-
         else:
            if employee:
                 fed_to = employee.manager_id

@@ -74,9 +74,22 @@
   <div class="layout">
     <div class="row">
       <div class="menu">
+        {% if designation == 'Manager' %}
+        <div class="active">
+          <a href="/manager/"><img class="img nav-icon" src="/static/img/home-alt-3-svgrepo-com.svg" /></a>
+        </div>       
+        {% endif %}
+        {% if designation == 'Employee' %}
         <div class="active">
           <a href="/employee/"><img class="img nav-icon" src="/static/img/home-alt-3-svgrepo-com.svg" /></a>
-        </div>  
+        </div>        
+        {% endif %}
+        {% if designation == 'HR' %}
+        <div class="active">
+          <a href="/HR/"><img class="img nav-icon" src="/static/img/home-alt-3-svgrepo-com.svg" /></a>
+        </div>        
+        {% endif %}  
+        
         <div>
           <a href="/employee/askhr"><img class="img nav-icon" src="/static/img/folder-svgrepo-com.svg" />
           </a>

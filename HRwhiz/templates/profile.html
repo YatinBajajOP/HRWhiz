@@ -51,7 +51,14 @@
     <div class="layout">
     <div class="row">
       <div class="menu">
-        <div><a href="/employee/"><img class="img nav-icon" src="/static/img/home-alt-3-svgrepo-com.svg" /></a></div>  
+        {% if designation == "Manager" %}
+        <div><a href="/manager/"><img class="img nav-icon" src="/static/img/home-alt-3-svgrepo-com.svg" /></a></div>   
+        {% elif designation == "Employee" %}
+        <div><a href="/employee/"><img class="img nav-icon" src="/static/img/home-alt-3-svgrepo-com.svg" /></a></div>    
+        {% elif  designation  == "HR" %}
+        <div><a href="/HR/"><img class="img nav-icon" src="/static/img/home-alt-3-svgrepo-com.svg" /></a></div>   
+        {% endif %}
+        
         <div><a href="/employee/askhr"><img class="img nav-icon" src="/static/img/folder-svgrepo-com.svg" /></a></div>
         <div><a href="/employee/feedback"><img class="img nav-icon" src="/static/img/mail-open-svgrepo-com.svg" /></a></div>
         
@@ -84,7 +91,7 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password:</label>
-                <input type="text" class="form-control" id="password" name="password" value="{{password}}" readonly>
+                <input type="password" class="form-control" id="password" name="password" value="{{password}}" readonly>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
@@ -100,7 +107,14 @@
                 <input type="number" class="form-control" id="phone_number" name="phone_number" value="{{phone_number}}" readonly>
             </div>
             <div class="row" style="width: 12rem">
-            <a href="/employee/profile/" type="button" class="btn btn-light col" id="cancelBtn" style="border-radius: 0%; display: none;">Cancel</a>
+              {% if designation == "Manager" %}
+              <a href="/manager/profile/" type="button" class="btn btn-light col" id="cancelBtn" style="border-radius: 0%; display: none;">Cancel</a>   
+              {% elif designation == "Employee" %}
+              <a href="/employee/profile/" type="button" class="btn btn-light col" id="cancelBtn" style="border-radius: 0%; display: none;">Cancel</a>    
+              {% elif  designation  == "HR" %}
+              <a href="/HR/profile/" type="button" class="btn btn-light col" id="cancelBtn" style="border-radius: 0%; display: none;">Cancel</a>  
+              {% endif %}
+            
             <button class="btn btn-light custom-button col" id="submit" style="display: none;">Save</button>
             <div>
         </form>
@@ -115,45 +129,45 @@
                         <h5 class="card-title">Leaves distribution chart:</h5>
                         <!-- Add your graph or chart here -->
                         <div class="leaves-card" >
-                    <div class="overlap-5">
-                      <div class="shadow"></div>
-                      <div class="base"></div>
-                      <div id="piechart"></div> 
-                      <div class="text-wrapper-leaves">
+                        <div class="overlap-5">
+                          <div class="shadow"></div>
+                          <div class="base"></div>
+                          <div id="piechart"></div> 
+                          <div class="text-wrapper-leaves">
 
-                      <table>
-              <tr>
-                <th>Number of leaves</th>
-            </tr>
-              <tr>
-                <td>
-                  Sick
-                </td>
-                <td></td>
-                <td>
-                  {{sick_leave}}
-                </td>
-              </tr>  
-              <tr>
-                <td>
-                  Casual
-                </td>
-                <td></td>
-                <td>
-                  {{casual_leave}}
-                </td>
-              </tr> 
-              <tr>
-                <td>
-                  Annual  
-                </td>
-                <td></td>
-                <td>
-                  {{annual_leave}}
-                </td>
-              </tr>             
-            </table></div>
-                
+                        <table>
+                          <tr>
+                            <th>Number of leaves</th>
+                          </tr>
+                            <tr>
+                              <td>
+                                Sick
+                              </td>
+                              <td></td>
+                              <td>
+                                {{sick_leave}}
+                              </td>
+                            </tr>  
+                            <tr>
+                              <td>
+                                Casual
+                              </td>
+                              <td></td>
+                              <td>
+                                {{casual_leave}}
+                              </td>
+                            </tr> 
+                            <tr>
+                              <td>
+                                Annual  
+                              </td>
+                              <td></td>
+                              <td>
+                                {{annual_leave}}
+                              </td>
+                            </tr>             
+                        </table></div>
+                        
    
                         <div id="graph" style="height: 60px;"></div>
                     </div>
