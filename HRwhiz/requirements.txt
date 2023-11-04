@@ -1,4 +1,4 @@
 dj-database-url
 psycopg2
-Django==4.0.0
+Django==4.2.6
 gunicorn==21.2.0
