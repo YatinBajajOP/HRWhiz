@@ -14,7 +14,16 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg shadow-sm">
-        <a href="/viewprofile/"><img class="icon img-fluid rounded-circle" src="{% static 'img/people-profile-graphic_24911-21373.jpg.avif' %}" /></a>
+        {% if designation == 'Manager' %}
+        <a href="/manager/profile"><img class="icon img-fluid rounded-circle" src="{% static 'img/people-profile-graphic_24911-21373.jpg.avif' %}" /></a>
+        {% endif %}
+        {% if designation == 'Employee' %}
+        <a href="/employee/profile"><img class="icon img-fluid rounded-circle" src="{% static 'img/people-profile-graphic_24911-21373.jpg.avif' %}" /></a>
+        {% endif %}
+        {% if designation == 'HR' %}
+        <a href="/HR/profile"><img class="icon img-fluid rounded-circle" src="{% static 'img/people-profile-graphic_24911-21373.jpg.avif' %}" /></a>
+        {% endif %}
+        
         <div class="container">
             {% if designation == 'Manager' %}
             <a class="navbar-brand" href="/manager/">HRWhiz</a>
@@ -79,13 +88,13 @@
                     <textarea class="form-control" id="reason" name="reason" rows="5" placeholder="Enter leave description"></textarea>
                 </div>
                 {% if designation == 'Manager' %}
-                <a href="/employee" type="cancel" class="btn btn-light" style="border-radius: 0%">Cancel</a>
+                <a href="/manager" type="cancel" class="btn btn-light" style="border-radius: 0%">Cancel</a>
                 {% endif %}
                 {% if designation == 'Employee' %}
                 <a href="/employee" type="cancel" class="btn btn-light" style="border-radius: 0%">Cancel</a>
                 {% endif %}
                 {% if designation == 'HR' %}
-                <a href="/employee" type="cancel" class="btn btn-light" style="border-radius: 0%">Cancel</a>
+                <a href="/HR" type="cancel" class="btn btn-light" style="border-radius: 0%">Cancel</a>
                 {% endif %}
 
                 <button type="submit" class="btn btn-light custom-button">Submit</button>
