@@ -33,7 +33,7 @@ class Employee(models.Model):
          editable = False) 
     name=models.CharField(max_length=80)
     email=models.EmailField(max_length=50)
-    password=models.CharField(max_length=30)
+    password=models.CharField(max_length=100)
     address=models.CharField(max_length=255)
     designation=models.CharField(max_length=80, default='Employee')
     sick_leave=models.IntegerField(default=12)
