@@ -1,10 +1,5 @@
 import uuid 
 from django.db import models 
-from django.core.validators import MinValueValidator, MaxValueValidator
-# Create your models here.
-
-# def create_uid():
-#     return str(uuid.uuid4())
 
 class Department(models.Model):
     id=models.CharField( 
@@ -44,7 +39,7 @@ class Employee(models.Model):
     sick_leave=models.IntegerField(default=12)
     casual_leave=models.IntegerField(default=5)
     annual_leave=models.IntegerField(default=5)
-    phone_number=models.IntegerField(validators=[MinValueValidator(1000000000), MaxValueValidator(9999999999)])
+    phone_number=models.CharField(max_length=10)
     pid=models.ForeignKey(Project,on_delete=models.CASCADE, null=True, blank=True, default="pid_default")
     did=models.ForeignKey(Department,on_delete=models.CASCADE, null=True, blank=True, default="did_default")
     manager_id=models.ForeignKey('self',on_delete=models.CASCADE,null=True,blank=True,related_name="manager", default="manager_id_default")
