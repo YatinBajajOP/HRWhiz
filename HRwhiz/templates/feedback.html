@@ -35,9 +35,8 @@
             <a class="navbar-brand" href="/HR/">HRWhiz</a>       
             {% endif %}       
 
-                
                       <ul class="navbar-nav ms-auto">
-                         
+
                           <div>
                           <ul class="navbar-nav row fw-bold" style="padding-right: 2rem">{{name}}</ul>
                           <ul class="navbar-nav row " style="padding-right: 2rem">{{designation}}</ul>
@@ -79,9 +78,6 @@
                         <!-- Add employee names dynamically here -->
                         <option value="Manager">Manager</option>
                         <option value="HR">HR</option>
-                        {% if designation == 'Manager' %}
-                        <option value="Employee"> Employee </option>
-                        {% endif %}
                     </select>
             </div>
             <div class="mb-3">
