@@ -44,7 +44,7 @@ def add_employee(request):
         casual_leave = request.POST.get('casual_leave')
         annual_leave = request.POST.get('annual_leave')
         phone_number = request.POST.get('phone_number')
-        profile_url = request.POST.get('profile_url')
+        # profile_url = request.POST.get('profile_url')
 
         # Create and save the Employee object
         employee = Employee(
@@ -58,17 +58,17 @@ def add_employee(request):
             casual_leave=casual_leave,
             annual_leave=annual_leave,
             phone_number=phone_number,
-            profile_url=profile_url
+            # profile_url=profile_url
         )
         employee.save()
         # api_url = 'https://hrwhiz-employee-management-app.onrender.com/HR/api/send_employee_email/'  # Adjust the URL as needed
-        data = {
-            'id': id,
-            'name': name,
-            'email': email,
-            'password': password,
-            'subject':'Test sub'
-        }
+        # data = {
+        #     'id': id,
+        #     'name': name,
+        #     'email': email,
+        #     'password': password,
+        #     'subject':'Test sub'
+        # }
         subject = 'Login Creadentials for HRWhiz'
         message= 'Hello {name},\n\nYour login email is: {email}\nYour temporary password is: {password}\n\nPlease change your password after initial login.'
         from_email = 'hrwhizapp2023@gmail.com'
