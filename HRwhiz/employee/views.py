@@ -47,7 +47,7 @@ def ask_hr(request):
         current_date=str(datetime.now().date())
         # print(text, employee, hr)
         if hr is not None:
-            res=askHR(id=str(uuid.uuid4()),text=text, hr_id = hr, date=current_date)
+            res=askHR(id=str(uuid.uuid4()),text=text, hr_id = hr, date=current_date, req_from=request.session['name'])
             res.save()
             return redirect("/employee")
         else:

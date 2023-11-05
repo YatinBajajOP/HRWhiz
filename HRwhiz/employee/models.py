@@ -74,6 +74,7 @@ class askHR(models.Model):
         editable = False) 
     text=models.CharField(max_length=500)
     hr_id = models.ForeignKey(Employee, on_delete=models.CASCADE, default=None)
+    req_from = models.CharField(max_length=40, default="Shraddha Sharma")
     date=models.CharField(max_length=10,blank=True,null=True)
     class Meta:
         verbose_name_plural='AskHR'
