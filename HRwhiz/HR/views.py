@@ -74,20 +74,20 @@ def add_employee(request):
         from_email = 'hrwhizapp2023@gmail.com'
         
 
-        response = requests.post(api_url, data=data)
+        # response = requests.post(api_url, data=data)
 
         try:
             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
             return HttpResponse({'message': 'Email sent successfully'}, status=status.HTTP_200_OK)
         except Exception as e:
             print(e)
-        return render(request, 'addemp.html',{'designation':request.session['designation'], 'name': request.session['name']})
+        return render(request, 'addemp.html', {'designation':request.session['designation'], 'name': request.session['name']})
     # Log the error for debugging
         # print(f"Email sending error: {str(e)}")
         # return HttpResponse({'error': 'Email sending failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-    return render(request, 'addemp.html',{'designation':request.session['designation'], 'name': request.session['name']})
+    return render(request, 'addemp.html', {'designation':request.session['designation'], 'name': request.session['name']})
 
 @session_login_required
 def success_page(request):
