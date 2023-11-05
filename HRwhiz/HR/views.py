@@ -78,7 +78,7 @@ def add_employee(request):
         # response = requests.post(api_url, data=data)
 
         try:
-            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+            # send_mail(subject, message, from_email, recipient_list, fail_silently=False)
             return HttpResponse({'message': 'Email sent successfully'}, status=status.HTTP_200_OK)
         except Exception as e:
             print(e)
