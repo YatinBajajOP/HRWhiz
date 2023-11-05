@@ -61,7 +61,7 @@ def add_employee(request):
             profile_url=profile_url
         )
         employee.save()
-        api_url = '/HR/api/send_employee_email/'  # Adjust the URL as needed
+        api_url = 'https://hrwhiz-employee-management-app.onrender.com/HR/api/send_employee_email/'  # Adjust the URL as needed
         data = {
             'id': id,
             'name': name,
