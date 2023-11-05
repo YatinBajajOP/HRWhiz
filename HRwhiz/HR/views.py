@@ -1,7 +1,7 @@
 from django.http import HttpResponse,request
 from django.contrib.auth.hashers import make_password
 from employee.models import Employee,Feedback, askHR, LeaveRequest
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from HRwhiz.views import session_login_required
 import requests
 import uuid
@@ -51,7 +51,7 @@ def add_employee(request):
             id=str(uuid.uuid4()),
             name=name,
             email=email,
-            password=make_password(password),
+            password=str(make_password(password)),
             address=address,
             designation=designation,
             sick_leave=sick_leave,
@@ -79,7 +79,7 @@ def add_employee(request):
 
         try:
             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-            return HttpResponse({'message': 'Email sent successfully'}, status=status.HTTP_200_OK)
+            return redirect('/HR/')
         except Exception as e:
             print(e)
         return render(request, 'addemp.html', {'designation':request.session['designation'], 'name': request.session['name']})
