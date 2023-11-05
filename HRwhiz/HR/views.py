@@ -70,7 +70,7 @@ def add_employee(request):
         #     'subject':'Test sub'
         # }
         subject = 'Login Creadentials for HRWhiz'
-        message= 'Hello {name},\n\nYour login email is: {email}\nYour temporary password is: {password}\n\nPlease change your password after initial login.'
+        message= f'Hello {name},\n\nYour login email is: {email}\nYour temporary password is: {password}\n\nPlease change your password after initial login.'
         from_email = 'hrwhizapp2023@gmail.com'
         recipient_list = [email]
         
@@ -78,7 +78,7 @@ def add_employee(request):
         # response = requests.post(api_url, data=data)
 
         try:
-            # send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
             return HttpResponse({'message': 'Email sent successfully'}, status=status.HTTP_200_OK)
         except Exception as e:
             print(e)
