@@ -122,7 +122,7 @@ def hr_requests_view(request):
     else:
         # Handle the case where the HR is not logged in or the session is not set
         # You can redirect to a login page or handle it as per your application's logic.
-        return render(request, 'hr.html',)
+        return render(request, 'hr.html')
 
 @session_login_required  
 def hr_feedback_view(request):
