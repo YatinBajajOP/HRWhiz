@@ -67,7 +67,7 @@ def leave_request(request):
 
         # Create and save a new LeaveRequest object
         if mgr_id is not None:
-            new_leave_request = LeaveRequest(id=str(uuid.uuid4()),date_from=date_from, date_to=date_to, reason=reason, req_to = mgr_id, type=type)
+            new_leave_request = LeaveRequest(id=str(uuid.uuid4()),date_from=date_from, date_to=date_to, reason=reason, req_to = mgr_id, req_from=request.session['name'], type=type)
             new_leave_request.save()
             if (request.session['designation']=='Manager'):
                 return redirect("/manager")
