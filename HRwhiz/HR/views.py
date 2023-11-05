@@ -31,7 +31,6 @@ def dashboard(request):
 
 @session_login_required
 def add_employee(request):
-    response = None
     if request.method == 'POST':
         # Retrieve data from the form
         # id = request.POST.get('id')
