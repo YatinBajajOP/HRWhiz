@@ -52,7 +52,7 @@ def log_in(request):
 
                     # Send the OTP via email
                     subject = 'Your OTP for Login'
-                    message = f'Your OTP is: {otp_code}'
+                    message = f'Your OTP is: {otp_code}. Thanks for using HRWhiz.'
                     from_email = 'hrwhizapp2023@gmail.com'  # Replace with your email
                     recipient_list = [user.email]
                     

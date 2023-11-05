@@ -14,20 +14,20 @@ from django.core.mail import send_mail
 def dashboard(request):
     return render(request, 'hr.html', {'name': request.session['name'], 'id': request.session['id'], 'designation': request.session['designation'], 'annual_leave': int(request.session['annual_leave']), 'casual_leave': int(request.session['casual_leave']), 'sick_leave': int(request.session['sick_leave'])})
 
-class EmployeeEmailAPI(APIView):
-    def post(self, request):
-        data = request.data
+# class EmployeeEmailAPI(APIView):
+#     def post(self, request):
+#         data = request.data
 
-        subject = "Your Employee Login Information"
-        message = f"Hello {data['name']},\n\nYour login email is: {data['email']}\nYour temporary password is: {data['password']}\n\nPlease change your password after initial login."
-        from_email = 'hrwhizapp2023@gmail.com'  # Use your own email address
-        recipient_list = [data['email']]
+#         subject = "Your Employee Login Information"
+#         message = f"Hello {data['name']},\n\nYour login email is: {data['email']}\nYour temporary password is: {data['password']}\n\nPlease change your password after initial login."
+#         from_email = 'hrwhizapp2023@gmail.com'  # Use your own email address
+#         recipient_list = [data['email']]
 
-        try:
-            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-            return Response({'message': 'Email sent successfully'}, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response({'error': 'Email sending failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+#         try:
+#             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+#             return Response({'message': 'Email sent successfully'}, status=status.HTTP_200_OK)
+#         except Exception as e:
+#             return Response({'error': 'Email sending failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @session_login_required
 def add_employee(request):
@@ -61,7 +61,7 @@ def add_employee(request):
             profile_url=profile_url
         )
         employee.save()
-        api_url = 'https://hrwhiz-employee-management-app.onrender.com/HR/api/send_employee_email/'  # Adjust the URL as needed
+        # api_url = 'https://hrwhiz-employee-management-app.onrender.com/HR/api/send_employee_email/'  # Adjust the URL as needed
         data = {
             'id': id,
             'name': name,
@@ -69,9 +69,10 @@ def add_employee(request):
             'password': password,
             'subject':'Test sub'
         }
-        subject = 'agds'
-        message= 'dhsfhj'
+        subject = 'Login Creadentials for HRWhiz'
+        message= 'Hello {name},\n\nYour login email is: {email}\nYour temporary password is: {password}\n\nPlease change your password after initial login.'
         from_email = 'hrwhizapp2023@gmail.com'
+        recipient_list = [email]
         
 
         # response = requests.post(api_url, data=data)
