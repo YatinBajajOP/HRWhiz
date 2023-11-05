@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password
 
 from employee.models import *
 from HRwhiz.views import session_login_required
+from datetime import datetime
 
 
 # Create your views here.
@@ -118,7 +119,7 @@ def send_pr(request):
         fed_to = Employee.objects.filter(id=selected_id).first()
 
         # Create and save the Feedback instance
-        res = Feedback(id=str(uuid.uuid4()), fed_to=fed_to, fed_by=employee, fed_body=description, type='Feedback')
+        res = Feedback(id=str(uuid.uuid4()), fed_to=fed_to, fed_by=employee, fed_body=description, type='Feedback', date=str(datetime.now().date()))
         res.save()
 
     user_list = Employee.objects.filter(manager_id=request.session['id'])
