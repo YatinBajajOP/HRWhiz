@@ -45,7 +45,7 @@ class Employee(models.Model):
     manager_id=models.ForeignKey('self',on_delete=models.CASCADE,null=True,blank=True,related_name="manager", default="manager_id_default")
     hr_id=models.ForeignKey('self',on_delete=models.CASCADE,null=True,blank=True,related_name="hr", default="hr_id_default")
     status=models.BooleanField(default=False)
-    profile_url=models.CharField(max_length=30, null=True, blank=True)
+    profile_url=models.CharField(max_length=300, null=True, blank=True)
 
     class Meta:
         verbose_name_plural='Employee'
@@ -61,7 +61,7 @@ class LeaveRequest(models.Model):
     date_to = models.DateField(auto_now=False, auto_now_add=False)
     reason = models.CharField(max_length=100)
     req_to = models.ForeignKey(Employee, on_delete=models.CASCADE, default=None)
-    type = models.CharField(max_length=30, default="Casual")
+    type = models.CharField(max_length=300, default="Casual")
 
     class Meta:
         verbose_name_plural='LeaveRequest'
@@ -71,7 +71,7 @@ class askHR(models.Model):
         primary_key=True,
         default = str(uuid.uuid4()), 
         editable = False) 
-    text=models.TextField()
+    text=models.CharField(max_length=500)
     hr_id = models.ForeignKey(Employee, on_delete=models.CASCADE, default=None)
     date=models.CharField(max_length=10,blank=True,null=True)
     class Meta:
@@ -86,7 +86,7 @@ class Feedback(models.Model):
     fed_by=models.ForeignKey(Employee,on_delete=models.CASCADE,related_name='given_feedback', null=True, blank=True)
     fed_to=models.ForeignKey(Employee,on_delete=models.CASCADE,related_name='recieved_feedback', null=True, blank=True)
     type=models.CharField(max_length=50)
-    fed_body=models.CharField(max_length=50)
+    fed_body=models.CharField(max_length=500)
     date=models.CharField(max_length=10,blank=True,null=True)
     class Meta:
         verbose_name_plural='Feedback'
