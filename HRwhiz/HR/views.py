@@ -101,7 +101,7 @@ def delete_employee(request):
         try:
             employee = Employee.objects.get(id=employee_id)
             employee.delete()
-            return HttpResponse('Employee removed')  # Redirect to a list view or another page
+            return redirect('HR/') # Redirect to a list view or another page
         except Employee.DoesNotExist:
             error_message = "Employee not found"
     else:
